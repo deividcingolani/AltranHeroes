@@ -97,7 +97,7 @@ function Table({ columns, data, updateMyData }) {
     usePagination,
     useRowSelect
   )
- 
+
 
   // Render the UI 
   return (
@@ -107,7 +107,7 @@ function Table({ columns, data, updateMyData }) {
 
         <div id="pageSize">
           {/* Select of Row per page */}
-          <s  elect
+          <select
             value={pageSize}
             onChange={e => {
               setPageSize(Number(e.target.value))
