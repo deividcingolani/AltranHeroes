@@ -15,25 +15,26 @@ function HomePage() {
     const [gnomes, setGnomes] = useState([]);
     const [table, setTable] = useState([]);
 
-    const openModal = (row) => {
-        console.log(row)
-        setOpenModalGnome(true);
-        setSelectedGnome(row)
 
-    }
+    /* This is for call to get data when the app is not inialized */
+    useEffect(() => {
+        if (!initialized) {
+            getData();
+            if (gnomes.length > 0) {
+                getTable();
+            }
+        }
+    })
 
-    const closeModal = () => {
-        setOpenModalGnome(false);
-    }
 
-
+    /* Get data initial of gnomes */
 
     const getData = async () => {
 
         const city = 'Brastlewark';
         const url = getUrlGnomes(city)
         const response = await getGnomes(url);
-        
+
         const gnomes = response.data.Brastlewark;
         const gnomesCustom = gnomes.map((g, i) =>
             g = {
@@ -49,20 +50,37 @@ function HomePage() {
         setInitialized(true);
     }
 
+    /* List of Gnomes */
     const getTable = async () => {
-        setTable(<Gnomes gnomes={gnomes} onClick={openModal} />)
+        setTable(<Gnomes gnomes={gnomes} onClick={openModal} onClickFilter={openModalFilter} />)
 
     }
 
-    useEffect(() => {
-        if (!initialized) {
-            getData();
-            if (gnomes.length > 0) {
-                getTable();
-            }
-        }
-    })
 
+    const openModalFilter = () => {
+        console.log('here is inside of my modal Filter')
+
+    }
+    const openModal = (row) => {
+        console.log(row)
+        setOpenModalGnome(true);
+        setSelectedGnome(row.original)
+
+    }
+
+    const closeModal = () => {
+        setOpenModalGnome(false);
+    }
+
+
+    const onClickFriends = (e) => {
+        const gnomeFriend = gnomes.filter(gnome => (gnome.name === e.target.value))[0]
+        console.log('inside of onclick FRiends')
+        
+        setSelectedGnome(gnomeFriend)
+        
+/*         e.preventDefault();
+ */    }
 
     return (
         <div className="home-page">
@@ -70,11 +88,11 @@ function HomePage() {
             {/* MODAL  */}
 
             <Modal size="lg" show={openModalGnome} onHide={closeModal} >
-                <Modal.Header closeButton>
-                    <Modal.Title> Detail of  Gnome</Modal.Title>
+                <Modal.Header row closeButton>
+                    <Modal.Title className="titleModalDetail col-md-6"> Profile of  Gnome</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <GnomeForm gnome={selectedGnome} onCloseModal={closeModal} />
+                    <GnomeForm gnome={selectedGnome} onCloseModal={closeModal} onClickFriends={onClickFriends} />
                 </Modal.Body>
             </Modal>
 

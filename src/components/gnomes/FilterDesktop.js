@@ -1,13 +1,7 @@
 import React from "react";
 import Select from 'react-select'
 import { Button } from "react-bootstrap";
-import { Formik, Field, Form } from 'formik';
 
-
-
-const MyInput = ({ field, form, ...props }) => {
-  return <input {...field} {...props} />;
-};
 
 
 const FilterGnomes = () => {
@@ -25,6 +19,7 @@ const FilterGnomes = () => {
   let weight;
   let height;
   let city;
+  let gender;
 
   const onSubmit = () => console.log(name)
 
@@ -61,6 +56,10 @@ const FilterGnomes = () => {
       <div class="form-group">
         <label htmlFor="height">Height</label>
         <input name="height" class="form-control" type="text" value={height} />
+      </div>
+      <div class="form-group">
+        <label htmlFor="gender">Gender</label>
+        <input name="gender" class="form-control" type="text" value={gender} />
       </div>
       <Button type="submit">Apply Filter</Button>
      

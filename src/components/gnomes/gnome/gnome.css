@@ -1,0 +1,38 @@
+.gnomeDetail .form-control {
+    background-color: #e2e1e1;
+}
+
+.gnomeDetail .form-control:focus {
+    background-color: #e2e1e1;
+}
+
+.img-thumbnail.form-thumbnail {
+    width: 150px;
+    height: 150px;
+}
+
+.img-thumbnail.form-thumbnail {
+    margin: auto;
+    display: block;
+}
+
+.buttonForm {
+    margin: auto;
+}
+
+.titleModalDetail {
+    position: absolute;
+    left: 33%;
+}
+
+.iconHelp {
+    transform: scale(1.2);
+    margin-left: 10px;
+}
+
+.divHelp{
+    display: none;
+}
+.iconHelp:hover + .divHelp {
+    display: block;
+}

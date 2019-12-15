@@ -2,26 +2,12 @@
       text-align: center;
   }
 
-  .age {
+
+  .table {
       text-align: center;
+
   }
 
-  .weight {
-      text-align: center;
-  }
-
-  .height {
-      text-align: center;
-  }
-
-
-  .details {
-      text-align: center;
-  }
-
-  .avatar {
-      text-align: center;
-  }
 
   .egReQt .img-thumbnail {
       width: 50px;
@@ -47,8 +33,26 @@
       height: 50px !important;
   }
 
+  .iconDetails {
+      width: 20px;
+      height: 20px;
+  }
+
+  .divButtonFilter {
+      margin-right: 20px;
+      display: none;
+
+  }
+
+  .buttonsHeader {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+  }
+
   @media only screen and (max-width: 400px) {
 
+      th:nth-child(3),
       th:nth-child(4),
       th:nth-child(5),
       th:nth-child(6),
@@ -56,6 +60,7 @@
           display: none
       }
 
+      td:nth-child(3),
       td:nth-child(4),
       td:nth-child(5),
       td:nth-child(6),
@@ -74,16 +79,37 @@
           margin-bottom: 10px;
           margin-left: 10px !important;
       }
+
+      .city,
+      .name {
+          font-size: 14px;
+      }
+
+      .iconDetails {
+          width: 10px;
+          height: 10px;
+      }
   }
 
-  @media only screen and (max-width: 600px) {
 
+  @media only screen and (max-width: 600px) {
+      .divButtonFilter {
+          display: block;
+
+      }
+
+      .filterGnomeDesktop {
+          display: none;
+      }
+
+      th:nth-child(7),
       th:nth-child(4),
       th:nth-child(5),
       th:nth-child(6) {
           display: none
       }
 
+      td:nth-child(7),
       td:nth-child(4),
       td:nth-child(5),
       td:nth-child(6) {
@@ -95,6 +121,25 @@
 
 
   @media only screen and (max-width: 900px) {
+
+      .table {
+          font-size: 14px;
+      }
+
+      th:nth-child(7),
+      th:nth-child(4),
+      th:nth-child(5),
+      th:nth-child(6) {
+          display: none
+      }
+
+      td:nth-child(7),
+      td:nth-child(4),
+      td:nth-child(5),
+      td:nth-child(6) {
+          display: none
+      }
+
       .pagination {
           height: 100px;
           flex-direction: column;
@@ -132,7 +177,9 @@
           justify-content: center;
       }
 
-      #pageSize {
-          display: none;
-      }
+  }
+
+  .iconHelp:hover {
+      background-color: gray;
+      border-radius: 10px;
   }

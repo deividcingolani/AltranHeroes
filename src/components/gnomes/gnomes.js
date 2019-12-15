@@ -11,8 +11,9 @@ import {
   useExpanded,
   useRowSelect,
 } from 'react-table'
-import { FaRegWindowRestore } from "react-icons/fa";
-import FilterGnomes from './FilterDesktop'
+import { FaRegWindowRestore, FaFilter } from "react-icons/fa";
+/* import FilterGnomes from './FilterDesktop'
+ */
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
@@ -70,7 +71,7 @@ const Styles = styled.div`
 `
 
 
-function Table({ columns, data, updateMyData }) {
+function Table({ columns, data, updateMyData, params }) {
 
   const {
     getTableProps,
@@ -101,12 +102,29 @@ function Table({ columns, data, updateMyData }) {
     useRowSelect
   )
 
-
   // Render the UI 
   return (
     <>
-      <div>
+{/*       <div className='filterGnomeDesktop'>
         <FilterGnomes />
+      </div>
+ */}
+      <div className="buttonsHeader">
+        <div className="divButtonFilter">
+          <Button
+            variant="outline-secondary"
+            className="buttonDetails"
+            size="sm"
+            data-placement="left"
+            title="Filter Gnomes ..."
+            onClick={() => params.onClickFilter()}
+          >
+            <FaFilter className="iconFilter" />
+          </Button>
+        </div>
+
+
+
 
         <div id="pageSize">
           {/* Select of Row per page */}
@@ -229,11 +247,6 @@ function Table({ columns, data, updateMyData }) {
   )
 }
 
-
-const testOnClick = (row)=>{
-  console.log('here is inside of test OnCLick')
-  console.log(row.original.thumbnail)
-}
 function Gnomes(params) {
 
 
@@ -256,7 +269,7 @@ function Gnomes(params) {
         id: 'avatar',
         Header: 'Avatar',
         Cell: ({ row }) => (
-          <img className="imageTable" onClick= {()=> testOnClick(row)} src={row.original.thumbnail} alt="Avatar" class="img-thumbnail"/>
+          <img className="imageTable" src={row.original.thumbnail} alt="Avatar" class="img-thumbnail" />
 
         ),
 
@@ -294,12 +307,13 @@ function Gnomes(params) {
         Cell: ({ row }) => (
           <Button
             variant="outline-secondary"
+            className="buttonDetails"
             size="sm"
             data-placement="left"
             title="More Information ..."
             onClick={() => params.onClick(row)}
           >
-            <FaRegWindowRestore />
+            <FaRegWindowRestore className="iconDetails" />
           </Button>
         ),
 
@@ -344,6 +358,7 @@ function Gnomes(params) {
         data={data}
         updateMyData={updateMyData}
         skipPageReset={skipPageResetRef.current}
+        params={params}
       />
     </Styles>
   )
