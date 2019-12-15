@@ -30,9 +30,12 @@
     margin-left: 10px;
 }
 
-.divHelp{
+.divHelp {
     display: none;
 }
-.iconHelp:hover + .divHelp {
+
+.iconHelp:hover+.divHelp {
     display: block;
 }
+
+

@@ -3,6 +3,8 @@ import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import './gnome.css'
 import { FiHelpCircle } from "react-icons/fi";
 
+
+
 function Gnome({
     onCloseModal,
     gnome,
@@ -23,7 +25,7 @@ function Gnome({
             <div className="col-md-8">
                 <div class="form-group ">
                     <label htmlFor="name" className="nameLabel">Name</label>
-                    <input name="name" className="form-control" type="text" value={data.name} disabled />
+                        <input name="name" className="form-control" type="text" value={data.name} disabled />
                 </div>
                 <div class="form-group ">
                     <label htmlFor="id"># Identification</label>
@@ -59,7 +61,7 @@ function Gnome({
 
             <div class="form-group col-md-6" >
                 <label for="professions" className="label nameLabel">Professions</label>
-                <select multiple className="form-control" id="professions" disabled>
+                <select multiple className="form-control selectModal" id="professions" disabled>
                     {data.professions.map(profession => (<option>{profession}</option>))}
                 </select>
             </div>
@@ -76,9 +78,10 @@ function Gnome({
                 </OverlayTrigger>
 
 
-                <select multiple className="form-control" id="friends" >
+                <select multiple className="form-control selectModal" id="friends" >
                     {data.friends.map(friends => (<option onClick={onClickFriends} value={friends}>{friends}</option>))}
                 </select>
+
             </div>
             <Button className="col-lg-6 col-md-12 buttonForm" variant="outline-secondary" onClick={onCloseModal}>CLOSE</Button>
         </div>
