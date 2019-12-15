@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Button } from 'react-bootstrap';
 import { Table as TableBootstrap } from 'react-bootstrap';
 import './gnomes.css'
+import '../../assets/images/TableOrder.ico'
 import {
   useTable,
   usePagination,
@@ -12,8 +13,7 @@ import {
 } from 'react-table'
 import { FaRegWindowRestore } from "react-icons/fa";
 import FilterGnomes from '../../components/gnomes/FilterGnomes'
-import Select from 'react-select'
-
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 const Styles = styled.div`
   padding: 1rem;
 
@@ -83,7 +83,7 @@ function Table({ columns, data, updateMyData }) {
     nextPage,
     previousPage,
     setPageSize,
-    state: { pageIndex, pageSize, selectedOrder },
+    state: { pageIndex, pageSize },
   } = useTable(
     {
       columns,
@@ -98,25 +98,7 @@ function Table({ columns, data, updateMyData }) {
     useRowSelect
   )
 
-  const optionsOrder =
-    headerGroups[0].headers.map((header, index) => (
-      { value: index, label: header.Header }
-    ));
 
-
-  headerGroups[0].headers[0].isSorted = true
-  headerGroups[0].headers[0].isSortedDesc = true
-
-  headerGroups[0].headers[1].isSorted = true
-  headerGroups[0].headers[1].isSortedDesc = true
-
-
-  console.log(headerGroups[0].headers[0].Header)
-  console.log(headerGroups[0].headers[0].isSorted)
-  console.log(headerGroups[0].headers[0].isSortedDesc)
-const onChange = ()=>{
-  console.log('here is my test')
-}
   // Render the UI 
   return (
     <>
@@ -138,8 +120,6 @@ const onChange = ()=>{
             ))}
           </select> entries
       </div>
-        <label for="order">Order</label>
-        <Select id="order" options={optionsOrder} placeholder="Order Table" value={selectedOrder} onChange={()=>onChange()}/>
       </div>
 
 
@@ -158,12 +138,17 @@ const onChange = ()=>{
 
                     <span {...column.getSortByToggleProps()}>
                       {column.render('Header')}
+
                       {/* Add a sort direction indicator */}
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? ' 🔽'
-                          : ' 🔼'
-                        : ''}
+                      {column.Header !== 'Details' ?
+                        column.isSorted
+                          ? column.isSortedDesc
+                            ? ' 🔽'
+                            : ' 🔼'
+                          : <> <IoIosArrowDown /> <IoIosArrowUp /></>
+                        : ''
+                      }
+
                     </span>
                   </div>
                 </th>
@@ -216,13 +201,13 @@ const onChange = ()=>{
           <span>
             Go to page:{' '}
             <input
+              id="pageNumber"
               type="number"
               value={pageIndex + 1}
               onChange={e => {
                 const page = e.target.value ? Number(e.target.value) - 1 : 0
                 gotoPage(page)
               }}
-              style={{ width: '100px' }}
             />
           </span>{' '}
         </div>

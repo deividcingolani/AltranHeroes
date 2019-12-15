@@ -19,12 +19,13 @@
       text-align: center;
   }
 
-  .pagination{
+  .pagination {
       display: flex;
       justify-content: center;
   }
+
   #paginationButton {
-    margin-right: 40px;
+      margin-right: 40px;
   }
 
   #paginationGoTo {
@@ -48,6 +49,18 @@
       td:nth-child(5) {
           display: none
       }
+
+      #pageNumber {
+          width: 70px !important;
+      }
+
+      #paginationGoTo {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 10px;
+        margin-left: 10px !important;
+    }
   }
 
   @media only screen and (max-width: 600px) {
@@ -76,12 +89,17 @@
       }
 
       #paginationButton {
-          height: 20px;
+          height: 100px;
           display: flex;
           flex-direction: row;
           justify-content: center;
           margin-bottom: 15px;
+          margin-top: 30px;
+      }
 
+      #paginationButton button {
+          margin-left: 30px;
+          height: 40px;
 
 
       }
@@ -100,7 +118,8 @@
           flex-direction: row;
           justify-content: center;
       }
-      #pageSize{
+
+      #pageSize {
           display: none;
       }
   }
