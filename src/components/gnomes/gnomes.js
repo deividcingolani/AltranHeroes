@@ -1,9 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Button } from 'react-bootstrap';
+
+/* Import Components Bootstrap */
 import { Table as TableBootstrap } from 'react-bootstrap';
-import './gnomes.css'
-import '../../assets/images/TableOrder.ico'
+import { Button } from 'react-bootstrap';
+
+/* Import Table */
+
 import {
   useTable,
   usePagination,
@@ -11,10 +13,16 @@ import {
   useExpanded,
   useRowSelect,
 } from 'react-table'
+
+/* Icons */
 import { FaRegWindowRestore, FaFilter } from "react-icons/fa";
-/* import FilterGnomes from './FilterDesktop'
- */
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+
+
+/* Styles */
+import styled from 'styled-components'
+import './gnomes.css'
+import { GnomeFilter } from './gnomeFilter/gnomeFilter';
 
 
 
@@ -105,10 +113,11 @@ function Table({ columns, data, updateMyData, params }) {
   // Render the UI 
   return (
     <>
-{/*       <div className='filterGnomeDesktop'>
-        <FilterGnomes />
+     
+      <div className='filterGnomeDesktop'>
+        <GnomeFilter />
       </div>
- */}
+
       <div className="buttonsHeader">
         <div className="divButtonFilter">
           <Button
@@ -180,7 +189,7 @@ function Table({ columns, data, updateMyData, params }) {
           ))}
         </thead>
 
-        <tbody {...getTableBodyProps()} striped >
+        <tbody {...getTableBodyProps()}  >
           {page.map(row => {
             prepareRow(row)
             return (
@@ -269,7 +278,7 @@ function Gnomes(params) {
         id: 'avatar',
         Header: 'Avatar',
         Cell: ({ row }) => (
-          <img className="imageTable" src={row.original.thumbnail} alt="Avatar" class="img-thumbnail" />
+          <img className="imageTable img-thumbnail" src={row.original.thumbnail} alt="Avatar" />
 
         ),
 

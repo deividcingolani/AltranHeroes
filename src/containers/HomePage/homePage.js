@@ -89,7 +89,7 @@ function HomePage() {
 
             <Modal size="lg" show={openModalGnome} onHide={closeModal} >
                 <Modal.Header row closeButton>
-                    <Modal.Title className="titleModalDetail col-md-6"> Profile of  Gnome</Modal.Title>
+                    <Modal.Title className="titleModalDetail col-md-6 col-xs-12"> Profile of  Gnome</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <GnomeForm gnome={selectedGnome} onCloseModal={closeModal} onClickFriends={onClickFriends} />
