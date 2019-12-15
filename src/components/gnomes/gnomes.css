@@ -1,0 +1,106 @@
+  .table .thead-dark th {
+      text-align: center;
+  }
+
+  .age {
+      text-align: center;
+  }
+
+  .weight {
+      text-align: center;
+  }
+
+  .height {
+      text-align: center;
+  }
+
+
+  .details {
+      text-align: center;
+  }
+
+  .pagination{
+      display: flex;
+      justify-content: center;
+  }
+  #paginationButton {
+    margin-right: 40px;
+  }
+
+  #paginationGoTo {
+      margin-right: 40px;
+  }
+
+
+
+  @media only screen and (max-width: 400px) {
+
+      th:nth-child(2),
+      th:nth-child(3),
+      th:nth-child(4),
+      th:nth-child(5) {
+          display: none
+      }
+
+      td:nth-child(2),
+      td:nth-child(3),
+      td:nth-child(4),
+      td:nth-child(5) {
+          display: none
+      }
+  }
+
+  @media only screen and (max-width: 600px) {
+
+      th:nth-child(2),
+      th:nth-child(3),
+      th:nth-child(4) {
+          display: none
+      }
+
+      td:nth-child(2),
+      td:nth-child(3),
+      td:nth-child(4) {
+          display: none
+      }
+
+
+  }
+
+
+  @media only screen and (max-width: 900px) {
+      .pagination {
+          height: 100px;
+          flex-direction: column;
+          justify-content: space-around;
+      }
+
+      #paginationButton {
+          height: 20px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          margin-bottom: 15px;
+
+
+
+      }
+
+      #paginationGoTo {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          margin-bottom: 10px;
+          margin-left: 70px;
+      }
+
+      #paginationPage {
+          display: flex;
+          margin-left: -75px;
+          flex-direction: row;
+          justify-content: center;
+      }
+      #pageSize{
+          display: none;
+      }
+  }
