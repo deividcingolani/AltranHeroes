@@ -12,8 +12,11 @@ import {
   useRowSelect,
 } from 'react-table'
 import { FaRegWindowRestore } from "react-icons/fa";
-import FilterGnomes from '../../components/gnomes/FilterGnomes'
+import FilterGnomes from './FilterDesktop'
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+
+
+
 const Styles = styled.div`
   padding: 1rem;
 
@@ -140,7 +143,7 @@ function Table({ columns, data, updateMyData }) {
                       {column.render('Header')}
 
                       {/* Add a sort direction indicator */}
-                      {column.Header !== 'Details' ?
+                      {column.Header !== 'Details' && column.Header !== 'Avatar' ?
                         column.isSorted
                           ? column.isSortedDesc
                             ? ' 🔽'
@@ -227,7 +230,10 @@ function Table({ columns, data, updateMyData }) {
 }
 
 
-
+const testOnClick = (row)=>{
+  console.log('here is inside of test OnCLick')
+  console.log(row.original.thumbnail)
+}
 function Gnomes(params) {
 
 
@@ -236,9 +242,24 @@ function Gnomes(params) {
   const columns = React.useMemo(
     () => [
       {
+        id: 'city',
+        Header: 'City',
+        accessor: 'city',
+      },
+      {
         id: 'name',
         Header: 'Name',
         accessor: 'name',
+      },
+      {
+
+        id: 'avatar',
+        Header: 'Avatar',
+        Cell: ({ row }) => (
+          <img className="imageTable" onClick= {()=> testOnClick(row)} src={row.original.thumbnail} alt="Avatar" class="img-thumbnail"/>
+
+        ),
+
       },
 
       {

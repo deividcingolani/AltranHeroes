@@ -1,5 +1,11 @@
-const APIURL = 'https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json';
 const axios = require('axios');
-export const getGnomes = () => axios.get(`${APIURL}`);
+export const getGnomes = (url) => axios.get(`${url}`);
+
+
+export function getUrlGnomes (city){
+    if(city==='Brastlewark'){
+        return 'https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json'
+    }
+}
 
 

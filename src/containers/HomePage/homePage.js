@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal'
 import './homePage.css';
 import { connect } from 'react-redux';
-import { getGnomes } from '../../axios/requests';
+import { getGnomes, getUrlGnomes } from '../../axios/requests';
 import Gnomes from '../../components/gnomes/gnomes'
 import GnomeForm from '../../components/gnomes/gnome/gnome'
 
@@ -16,6 +16,7 @@ function HomePage() {
     const [table, setTable] = useState([]);
 
     const openModal = (row) => {
+        console.log(row)
         setOpenModalGnome(true);
         setSelectedGnome(row)
 
@@ -28,14 +29,19 @@ function HomePage() {
 
 
     const getData = async () => {
-        const response = await getGnomes();
+
+        const city = 'Brastlewark';
+        const url = getUrlGnomes(city)
+        const response = await getGnomes(url);
+        
         const gnomes = response.data.Brastlewark;
         const gnomesCustom = gnomes.map((g, i) =>
             g = {
                 ...g,
                 weight: (g.weight).toFixed(2),
                 height: (g.height).toFixed(2),
-                gender : (Math.random() > 0.5? 'Female':'Male')
+                gender: (Math.random() > 0.7 ? 'Female' : 'Male'),
+                city: city
             }
         )
 
@@ -61,9 +67,9 @@ function HomePage() {
     return (
         <div className="home-page">
 
-           {/* MODAL  */}
+            {/* MODAL  */}
 
-            <Modal show={openModalGnome} onHide={closeModal} >
+            <Modal size="lg" show={openModalGnome} onHide={closeModal} >
                 <Modal.Header closeButton>
                     <Modal.Title> Detail of  Gnome</Modal.Title>
                 </Modal.Header>
