@@ -20,9 +20,10 @@ export const GnomeFilter = (params) => {
         }
     })
 
+    /* This is for set functionct that change page of table */
+    const goToPage=params.gotoPage
 
-
-
+    /* This is for set function, that change data of table */
     const resetData = params.resetData
 
     /* Set gnomes*/
@@ -106,7 +107,6 @@ export const GnomeFilter = (params) => {
         gnomesFilter = gnomesFilter.filter(gnome => gnome.height <= max);
 
         resetData(gnomesFilter)
-        console.log(params)
 
 
     };
@@ -181,13 +181,18 @@ export const GnomeFilter = (params) => {
         } else {
             name = ""
         }
+
+        if(params.paramsUrl && params.paramsUrl.page && !initialized){
+            const goPage = params.paramsUrl.page -1
+            goToPage(goPage)
+        }
     }
 
     return (
         <div className={styleShowForm}>
             <form onSubmit={handleSubmit(onSubmit)} className="row formFilter ">
                 {/* Inputs Form */}
-                <div class="inputsForm col-md-9 col-lg-8 col-xl-6">
+                <div className="inputsForm col-md-9 col-lg-8 col-xl-6">
                     {/* First Line of Filter */}
 
                     <div className={" row first-line col-md-12"} >
@@ -275,7 +280,7 @@ export const GnomeFilter = (params) => {
 
                     </div>
                 </div>
-                <div class="buttonSubmit col-sm-12 col-md-3 col-lg-3 col-xl-2">
+                <div className="buttonSubmit col-sm-12 col-md-3 col-lg-3 col-xl-2">
                     <Button type="submit" className="col-sm-12 col-lg-8 submitButtonFilter btn-text" onClick={params.onClick}>Apply Filter</Button>
                 </div>
 

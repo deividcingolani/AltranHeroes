@@ -6,7 +6,10 @@ import { connect } from 'react-redux';
 import { getGnomes, getUrlGnomes } from '../../axios/requests';
 import Gnomes from '../../components/gnomes/gnomes'
 import GnomeForm from '../../components/gnomes/gnome/gnome'
+
 const queryString = require('query-string');
+
+
 
 function HomePage(props) {
     const [openModalGnome, setOpenModalGnome] = useState(false);
@@ -80,12 +83,12 @@ function HomePage(props) {
 
     return (
         <div className="home-page">
-
+      
             {/* MODAL  */}
 
             <Modal size="lg" show={openModalGnome} onHide={closeModal} >
                 <Modal.Header closeButton>
-                    <Modal.Title className="titleModalDetail col-md-6 col-xs-12"> Profile of  Gnome</Modal.Title>
+                    <Modal.Title className="titleModalDetail col-md-6 col-xs-12"> Profile of Gnome</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <GnomeForm gnome={selectedGnome} onCloseModal={closeModal} onClickFriends={onClickFriends} />

@@ -24,6 +24,8 @@ import styled from 'styled-components'
 import './gnomes.css'
 import { GnomeFilter } from './gnomeFilter/gnomeFilter';
 import { useState } from 'react';
+import useQueryString from "../../useQueryString";
+import { Tabs, Tab } from "react-bootstrap";
 
 
 
@@ -77,7 +79,7 @@ const Styles = styled.div`
 `
 
 
-function Table({ columns, data, skipReset, resetData, params}) {
+function Table({ columns, data, skipReset, resetData, params }) {
 
   const {
     getTableProps,
@@ -111,17 +113,44 @@ function Table({ columns, data, skipReset, resetData, params}) {
     useRowSelect
   )
 
-  const [showFormFilter, setShowFormFilter] = useState(false );
+  const [showFormFilter, setShowFormFilter] = useState(false);
   const [dataForm, setDataForm] = useState(data);
+  const [valuePage, onSetValuePage] = useQueryString("page");
 
   const onClickFilter = () => {
     setShowFormFilter(!showFormFilter)
   }
 
+
+  /* Clicks of Pagination */
+  const onClickgotoPage = (value) => {
+    gotoPage(value)
+    onSetValuePage(value + 1)
+  }
+
+  const onClickpreviousPage = () => {
+    onSetValuePage(pageIndex + 2)
+
+    previousPage()
+
+  }
+
+  const onClicknextPage = () => {
+
+    onSetValuePage(pageIndex + 2)
+
+    nextPage()
+  }
+
+
+
   return (
     <>
-
-
+      <Tabs activeKey={valuePage} onSelect={onSetValuePage}>
+        <Tab eventKey="1" title="a" />
+        <Tab eventKey="2" title="b" />
+        <Tab eventKey="3" title="c" />
+      </Tabs>
 
       <div className="buttonsHeader">
         <div className="resultsGnomes">Results: {data.length}</div>
@@ -160,10 +189,14 @@ function Table({ columns, data, skipReset, resetData, params}) {
 
       </div>
       <div className='filterGnomeDesktop'>
-        <GnomeFilter gnomes={dataForm} setGnomes={setDataForm} showFormFilter={showFormFilter}  resetData={resetData} onClick={onClickFilter} paramsUrl={params.paramsUrl}/>
+        <GnomeFilter gnomes={dataForm}
+          setGnomes={setDataForm}
+          showFormFilter={showFormFilter}
+          resetData={resetData}
+          onClick={onClickFilter}
+          paramsUrl={params.paramsUrl}
+          gotoPage={gotoPage} />
       </div>
-
-
       {/* Render Table of Gnomes */}
       <TableBootstrap {...getTableProps()} responsive striped hover >
 
@@ -219,22 +252,20 @@ function Table({ columns, data, skipReset, resetData, params}) {
 
       </TableBootstrap>
 
-
-
       {/* Pagination and Page Number */}
       <div className="pagination">
         <div id="paginationButton">
 
-          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          <button onClick={() => onClickgotoPage(0)} disabled={!canPreviousPage}>
             {'<<'}
           </button>{' '}
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          <button onClick={() => onClickpreviousPage()} disabled={!canPreviousPage}>
             {'<'}
           </button>{' '}
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
+          <button onClick={() => onClicknextPage()} disabled={!canNextPage}>
             {'>'}
           </button>{' '}
-          <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          <button onClick={() => onClickgotoPage(pageCount - 1)} disabled={!canNextPage}>
             {'>>'}
           </button>{' '}
         </div>
@@ -343,7 +374,7 @@ function Gnomes(params) {
     [params]
   )
 
-  const [data,setData] = React.useState(() => params.gnomes)
+  const [data, setData] = React.useState(() => params.gnomes)
 
   // We need to keep the table from resetting the pageIndex when we
   // Update data. So we can keep track of that flag with a ref.
