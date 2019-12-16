@@ -25,7 +25,6 @@ import './gnomes.css'
 import { GnomeFilter } from './gnomeFilter/gnomeFilter';
 import { useState } from 'react';
 import useQueryString from "../../useQueryString";
-import { Tabs, Tab } from "react-bootstrap";
 
 
 
@@ -146,12 +145,6 @@ function Table({ columns, data, skipReset, resetData, params }) {
 
   return (
     <>
-      <Tabs activeKey={valuePage} onSelect={onSetValuePage}>
-        <Tab eventKey="1" title="a" />
-        <Tab eventKey="2" title="b" />
-        <Tab eventKey="3" title="c" />
-      </Tabs>
-
       <div className="buttonsHeader">
         <div className="resultsGnomes">Results: {data.length}</div>
         {/* For mobile, toggle Table Filter of Gnome */}
