@@ -4,6 +4,18 @@
 
 }
 
+
+.row.second-line {
+    justify-content: flex-start;
+  }
+  
+  .row.first-line {
+    justify-content: flex-start;
+  }
+  
+  .submitButtonFilter{
+      border-radius: 50px;
+  }
 /* Css of Header of container Gnomes */
 .divButtonFilter {
     margin-right: 20px;

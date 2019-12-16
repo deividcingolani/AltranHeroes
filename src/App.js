@@ -18,10 +18,12 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link href="/">Home</Nav.Link>
+
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Route path="/" exact component={HomePage} />
+        <Route path="/" component={HomePage} />
+
       </Router>
     </div>
   );

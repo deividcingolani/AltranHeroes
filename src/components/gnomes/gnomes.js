@@ -77,7 +77,7 @@ const Styles = styled.div`
 `
 
 
-function Table({ columns, data, skipReset, resetData }) {
+function Table({ columns, data, skipReset, resetData, params}) {
 
   const {
     getTableProps,
@@ -160,7 +160,7 @@ function Table({ columns, data, skipReset, resetData }) {
 
       </div>
       <div className='filterGnomeDesktop'>
-        <GnomeFilter gnomes={dataForm} setGnomes={setDataForm} showFormFilter={showFormFilter}  resetData={resetData} onClick={onClickFilter}/>
+        <GnomeFilter gnomes={dataForm} setGnomes={setDataForm} showFormFilter={showFormFilter}  resetData={resetData} onClick={onClickFilter} paramsUrl={params.paramsUrl}/>
       </div>
 
 
@@ -360,8 +360,6 @@ function Gnomes(params) {
   // Let's add a data resetter/randomizer to help
   // illustrate that flow...
   const resetData = (gnomes) => {
-    console.log('inside of my resetData')
-    console.log(gnomes)
     // Don't reset the page when we do this
     skipResetRef.current = true
     setData(gnomes)

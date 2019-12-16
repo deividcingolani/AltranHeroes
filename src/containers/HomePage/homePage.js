@@ -6,15 +6,17 @@ import { connect } from 'react-redux';
 import { getGnomes, getUrlGnomes } from '../../axios/requests';
 import Gnomes from '../../components/gnomes/gnomes'
 import GnomeForm from '../../components/gnomes/gnome/gnome'
+const queryString = require('query-string');
 
-
-function HomePage() {
+function HomePage(props) {
     const [openModalGnome, setOpenModalGnome] = useState(false);
     const [initialized, setInitialized] = useState(false);
     const [selectedGnome, setSelectedGnome] = useState({});
     const [gnomes, setGnomes] = useState([]);
     const [table, setTable] = useState([]);
 
+
+    const paramsUrl = queryString.parse(props.location.search);
 
     /* This is for call to get data when the app is not inialized */
     useEffect(() => {
@@ -23,6 +25,7 @@ function HomePage() {
             if (gnomes.length > 0) {
                 getTable();
             }
+
         }
     })
 
@@ -52,13 +55,12 @@ function HomePage() {
 
     /* List of Gnomes */
     const getTable = async () => {
-        setTable(<Gnomes gnomes={gnomes} onClick={openModal}  />)
+        setTable(<Gnomes gnomes={gnomes} onClick={openModal} paramsUrl={paramsUrl} />)
 
     }
 
 
     const openModal = (row) => {
-        console.log(row)
         setOpenModalGnome(true);
         setSelectedGnome(row.original)
 
@@ -71,12 +73,10 @@ function HomePage() {
 
     const onClickFriends = (e) => {
         const gnomeFriend = gnomes.filter(gnome => (gnome.name === e.target.value))[0]
-        console.log('inside of onclick FRiends')
-        
+
+
         setSelectedGnome(gnomeFriend)
-        
-/*         e.preventDefault();
- */    }
+   }
 
     return (
         <div className="home-page">
@@ -84,7 +84,7 @@ function HomePage() {
             {/* MODAL  */}
 
             <Modal size="lg" show={openModalGnome} onHide={closeModal} >
-                <Modal.Header  closeButton>
+                <Modal.Header closeButton>
                     <Modal.Title className="titleModalDetail col-md-6 col-xs-12"> Profile of  Gnome</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
