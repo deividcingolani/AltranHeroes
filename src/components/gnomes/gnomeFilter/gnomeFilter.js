@@ -4,12 +4,12 @@ import Select from 'react-select'
 import { Button } from "react-bootstrap";
 import { RHFInput } from 'react-hook-form-input';
 import './gnomeFilter.css'
-import classes from './test.module.css'
+import classes from './toggleFilter.module.css'
 
 export const GnomeFilter = (params) => {
     const { handleSubmit, register, setValue } = useForm();
-    /* const [value, setValue] = useState(false);
- */
+    const resetData = params.resetData
+    
     /* Set gnomes*/
     const gnomes = params.gnomes
 
@@ -57,10 +57,7 @@ export const GnomeFilter = (params) => {
 
 
     const onSubmit = values => {
-        console.log(values);
-        console.log('here is my gnomes prefilter')
-        console.log(gnomes)
-
+       
         /* Set gnomesFilter with all Gnomes */
         let gnomesFilter = gnomes
 
@@ -95,17 +92,19 @@ export const GnomeFilter = (params) => {
 
         gnomesFilter = gnomesFilter.filter(gnome => gnome.height >= min);
         gnomesFilter = gnomesFilter.filter(gnome => gnome.height <= max);
-        params.setGnomes(gnomesFilter)
-
+        
+        
+        console.log(gnomesFilter)
+        resetData(gnomesFilter)
     };
 
     return (
         <div className={styleShowForm}>
-            <form onSubmit={handleSubmit(onSubmit)} className="row">
+            <form onSubmit={handleSubmit(onSubmit)}>
 
                 {/* First Line of Filter */}
 
-                <div className={"row col-12 first-line"} >
+                <div className={" row first-line"} >
 
                     {/* City */}
                     <div className="form-group col-md-3">
@@ -121,11 +120,6 @@ export const GnomeFilter = (params) => {
                     </div>
 
 
-                    {/* Name */}
-                    <div className="form-group  col-md-3">
-                        <label htmlFor="name">Name</label>
-                        <input name="name" className="form-control" type="text" ref={register} />
-                    </div>
 
                     {/* Gender */}
                     <div className="form-group gender col-md-3">
@@ -140,12 +134,18 @@ export const GnomeFilter = (params) => {
                         />
                     </div>
 
+                    {/* Name */}
+                    <div className="form-group  col-md-3">
+                        <label htmlFor="name">Name</label>
+                        <input name="name" className="form-control" type="text" ref={register} />
+                    </div>
+
                 </div>
 
-                <div className="row col-12 second-line">
+                <div className="row  second-line">
 
                     {/* Age  */}
-                    <div className="form-group col-md-2 form-group-age">
+                    <div className="form-group col-md-3 form-group-age">
                         <div className="labelAge">
                             <label htmlFor="age">Age </label>
                         </div>
@@ -159,7 +159,7 @@ export const GnomeFilter = (params) => {
 
 
                     {/* Weight */}
-                    <div className="form-group form-group-weight col-md-2">
+                    <div className="form-group form-group-weight col-md-3">
                         <div className="labelWeight">
                             <label htmlFor="weight">Weight</label>
                         </div>
@@ -173,7 +173,7 @@ export const GnomeFilter = (params) => {
 
 
                     {/* Height */}
-                    <div className="form-group form-group-height col-md-2">
+                    <div className="form-group form-group-height col-md-3">
                         <div className="labelHeight">
                             <label htmlFor="weight">Height</label>
                         </div >
@@ -185,9 +185,10 @@ export const GnomeFilter = (params) => {
                                 defaultValue={maxHeight} />
                         </div>
                     </div>
-                    <Button type="submit" className="col-md-1 submitFilter">Apply Filter</Button>
 
                 </div>
+                
+                <Button type="submit" className=" col-xs-12 col-sm-12 col-md-4 submit" onClick={params.onClick}>Apply Filter</Button>
 
 
             </form>

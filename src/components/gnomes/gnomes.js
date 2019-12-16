@@ -77,7 +77,7 @@ const Styles = styled.div`
 `
 
 
-function Table({ columns, data }) {
+function Table({ columns, data, skipReset, resetData }) {
 
   const {
     getTableProps,
@@ -99,7 +99,10 @@ function Table({ columns, data }) {
       columns,
       data,
       initialState: { pageIndex: 0 },
-
+      // We also need to pass this so the page doesn't change
+      // when we edit the data.
+      autoResetPage: !skipReset,
+      autoResetSelectedRows: !skipReset,
 
     },
     useSortBy,
@@ -108,14 +111,12 @@ function Table({ columns, data }) {
     useRowSelect
   )
 
-  const [showFormFilter, setShowFormFilter] = useState(false);
+  const [showFormFilter, setShowFormFilter] = useState(false );
   const [dataForm, setDataForm] = useState(data);
 
-  const onClickFilter = ()=>{
+  const onClickFilter = () => {
     setShowFormFilter(!showFormFilter)
   }
-
-
 
   return (
     <>
@@ -159,7 +160,7 @@ function Table({ columns, data }) {
 
       </div>
       <div className='filterGnomeDesktop'>
-        <GnomeFilter gnomes={dataForm} setGnomes={setDataForm} showFormFilter={showFormFilter}/>
+        <GnomeFilter gnomes={dataForm} setGnomes={setDataForm} showFormFilter={showFormFilter}  resetData={resetData} onClick={onClickFilter}/>
       </div>
 
 
@@ -342,7 +343,33 @@ function Gnomes(params) {
     [params]
   )
 
-  const [data] = React.useState(() => params.gnomes)
+  const [data,setData] = React.useState(() => params.gnomes)
+
+  // We need to keep the table from resetting the pageIndex when we
+  // Update data. So we can keep track of that flag with a ref.
+  const skipResetRef = React.useRef(false)
+
+
+  // After data chagnes, we turn the flag back off
+  // so that if data actually changes when we're not
+  // editing it, the page is reset
+  React.useEffect(() => {
+    skipResetRef.current = false
+  }, [data])
+
+  // Let's add a data resetter/randomizer to help
+  // illustrate that flow...
+  const resetData = (gnomes) => {
+    console.log('inside of my resetData')
+    console.log(gnomes)
+    // Don't reset the page when we do this
+    skipResetRef.current = true
+    setData(gnomes)
+  }
+
+
+
+
 
   return (
     <Styles>
@@ -350,6 +377,8 @@ function Gnomes(params) {
         columns={columns}
         data={data}
         params={params}
+        resetData={resetData}
+        skipReset={skipResetRef.current}
       />
     </Styles>
   )

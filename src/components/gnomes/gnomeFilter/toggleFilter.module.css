@@ -1,0 +1,30 @@
+.Closed{
+    display: block;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.Open{
+    display: block;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+
+
+
+@media only screen and (max-width: 800px) {
+    .Closed{
+        display: none;
+    }
+    
+    .Open{
+        display: block;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    
+    }
+    
+    
+    
+}
