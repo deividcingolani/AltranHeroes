@@ -23,6 +23,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import styled from 'styled-components'
 import './gnomes.css'
 import { GnomeFilter } from './gnomeFilter/gnomeFilter';
+import { useState } from 'react';
 
 
 
@@ -72,14 +73,11 @@ const Styles = styled.div`
     width: 100px;
   }
 
-  input[type=number]{
-    width: 120px !important;
-  }
 
 `
 
 
-function Table({ columns, data, updateMyData, params }) {
+function Table({ columns, data }) {
 
   const {
     getTableProps,
@@ -101,7 +99,7 @@ function Table({ columns, data, updateMyData, params }) {
       columns,
       data,
       initialState: { pageIndex: 0 },
-      updateMyData,
+
 
     },
     useSortBy,
@@ -110,15 +108,25 @@ function Table({ columns, data, updateMyData, params }) {
     useRowSelect
   )
 
+  const [showFormFilter, setShowFormFilter] = useState(false);
+  const [dataForm, setDataForm] = useState(data);
+
+  const onClickFilter = ()=>{
+    setShowFormFilter(!showFormFilter)
+  }
+
+  console.log(dataForm)
   // Render the UI 
   return (
     <>
-     
+
       <div className='filterGnomeDesktop'>
-        <GnomeFilter />
+        <GnomeFilter gnomes={dataForm} setDataForm={setDataForm} showFormFilter={showFormFilter}/>
       </div>
 
       <div className="buttonsHeader">
+
+        {/* For mobile, toggle Table Filter of Gnome */}
         <div className="divButtonFilter">
           <Button
             variant="outline-secondary"
@@ -126,7 +134,7 @@ function Table({ columns, data, updateMyData, params }) {
             size="sm"
             data-placement="left"
             title="Filter Gnomes ..."
-            onClick={() => params.onClickFilter()}
+            onClick={() => onClickFilter()}
           >
             <FaFilter className="iconFilter" />
           </Button>
@@ -134,9 +142,8 @@ function Table({ columns, data, updateMyData, params }) {
 
 
 
-
+        {/* Select of Row per page */}
         <div id="pageSize">
-          {/* Select of Row per page */}
           <select
             value={pageSize}
             onChange={e => {
@@ -150,11 +157,13 @@ function Table({ columns, data, updateMyData, params }) {
             ))}
           </select> entries
       </div>
+
+
       </div>
 
 
 
-
+      {/* Render Table of Gnomes */}
       <TableBootstrap {...getTableProps()} responsive striped hover >
 
         <thead className="thead-dark">
@@ -209,6 +218,9 @@ function Table({ columns, data, updateMyData, params }) {
 
       </TableBootstrap>
 
+
+
+      {/* Pagination and Page Number */}
       <div className="pagination">
         <div id="paginationButton">
 
@@ -258,9 +270,7 @@ function Table({ columns, data, updateMyData, params }) {
 
 function Gnomes(params) {
 
-
-
-
+  /* Declare columns of my table of Gnomes */
   const columns = React.useMemo(
     () => [
       {
@@ -332,41 +342,13 @@ function Gnomes(params) {
     [params]
   )
 
-  const [data, setData] = React.useState(() => params.gnomes)
-
-  // We need to keep the table from resetting the pageIndex when we
-  // Update data. So we can keep track of that flag with a ref.
-  const skipPageResetRef = React.useRef(false)
-
-  // When our cell renderer calls updateMyData, we'll use
-  // the rowIndex, columnId and new value to update the
-  // original data
-  const updateMyData = (rowIndex, columnId, value) => {
-    // We also turn on the flag to not reset the page
-    skipPageResetRef.current = true
-    setData(old =>
-      old.map((row, index) => {
-        if (index === rowIndex) {
-          return {
-            ...row,
-            [columnId]: value,
-          }
-        }
-        return row
-      })
-    )
-  }
-
-
-
+  const [data] = React.useState(() => params.gnomes)
 
   return (
     <Styles>
       <Table
         columns={columns}
         data={data}
-        updateMyData={updateMyData}
-        skipPageReset={skipPageResetRef.current}
         params={params}
       />
     </Styles>

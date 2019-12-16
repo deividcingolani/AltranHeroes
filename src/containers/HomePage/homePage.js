@@ -52,15 +52,11 @@ function HomePage() {
 
     /* List of Gnomes */
     const getTable = async () => {
-        setTable(<Gnomes gnomes={gnomes} onClick={openModal} onClickFilter={openModalFilter} />)
+        setTable(<Gnomes gnomes={gnomes} onClick={openModal}  />)
 
     }
 
 
-    const openModalFilter = () => {
-        console.log('here is inside of my modal Filter')
-
-    }
     const openModal = (row) => {
         console.log(row)
         setOpenModalGnome(true);
@@ -88,7 +84,7 @@ function HomePage() {
             {/* MODAL  */}
 
             <Modal size="lg" show={openModalGnome} onHide={closeModal} >
-                <Modal.Header row closeButton>
+                <Modal.Header  closeButton>
                     <Modal.Title className="titleModalDetail col-md-6 col-xs-12"> Profile of  Gnome</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

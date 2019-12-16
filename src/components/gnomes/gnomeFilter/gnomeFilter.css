@@ -1,0 +1,46 @@
+/* Css of Header of container Gnomes */
+.divButtonFilter {
+    margin-right: 20px;
+}
+
+.buttonsHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+
+
+
+/* filter */
+
+.inputAge,
+.inputWeight,
+.inputHeight {
+    display: flex;
+    justify-content: space-around;
+}
+
+.labelAge,
+.labelWeight,
+.labelHeight {
+    display: flex;
+    justify-content: center;
+}
+
+
+.form-control.filterInputNumber {
+
+    width: 40% !important;
+    text-align: center;
+
+}
+
+
+@media only screen and (min-width: 800px) {
+    .divButtonFilter {
+        display: none;
+    }
+    
+}

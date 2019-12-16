@@ -1,16 +1,4 @@
-/* Css of Header of container Gnomes */
-.divButtonFilter {
-    margin-right: 20px;
-    display: none;
 
-}
-
-.buttonsHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}  
- 
 /* CSS of Table */
   
   .table .thead-dark th {
@@ -100,14 +88,7 @@
 
 
   @media only screen and (max-width: 600px) {
-      .divButtonFilter {
-          display: block;
 
-      }
-
-      .filterGnomeDesktop {
-          display: none;
-      }
 
       th:nth-child(7),
       th:nth-child(4),
