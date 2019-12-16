@@ -115,17 +115,15 @@ function Table({ columns, data }) {
     setShowFormFilter(!showFormFilter)
   }
 
-  console.log(dataForm)
-  // Render the UI 
+
+
   return (
     <>
 
-      <div className='filterGnomeDesktop'>
-        <GnomeFilter gnomes={dataForm} setDataForm={setDataForm} showFormFilter={showFormFilter}/>
-      </div>
+
 
       <div className="buttonsHeader">
-
+        <div className="resultsGnomes">Results: {data.length}</div>
         {/* For mobile, toggle Table Filter of Gnome */}
         <div className="divButtonFilter">
           <Button
@@ -160,7 +158,9 @@ function Table({ columns, data }) {
 
 
       </div>
-
+      <div className='filterGnomeDesktop'>
+        <GnomeFilter gnomes={dataForm} setGnomes={setDataForm} showFormFilter={showFormFilter}/>
+      </div>
 
 
       {/* Render Table of Gnomes */}

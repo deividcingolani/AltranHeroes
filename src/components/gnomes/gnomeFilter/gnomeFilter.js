@@ -7,12 +7,14 @@ import './gnomeFilter.css'
 import classes from './test.module.css'
 
 export const GnomeFilter = (params) => {
-    const { handleSubmit, register, setValueCity, setValueGender } = useForm();
-
-
+    const { handleSubmit, register, setValue } = useForm();
+    /* const [value, setValue] = useState(false);
+ */
+    /* Set gnomes*/
     const gnomes = params.gnomes
 
-    /* Set options of Select in form */
+    /* Set options of Selects */
+
     /* Cities */
     const optionsCities = [
         { value: '0', label: 'All' },
@@ -21,6 +23,7 @@ export const GnomeFilter = (params) => {
 
     /*Gender  */
     const optionsGender = [
+        { value: '0', label: 'All' },
         { value: 'male', label: 'Male' },
         { value: 'female', label: 'Female' },
     ];
@@ -28,27 +31,19 @@ export const GnomeFilter = (params) => {
 
     /* Get min and Max  */
     /* Age*/
-    const minAge = gnomes.reduce((min, gnome) => gnome.age < min ? gnome.age : min, gnomes[0].age);
-    const maxAge = gnomes.reduce((max, gnome) => gnome.age > max ? gnome.age : max, gnomes[0].age);
+    let minAge, maxAge, minWeight, maxWeight, minHeight, maxHeight;
+    if (gnomes && gnomes[0  ]) {
+        minAge = gnomes.reduce((min, gnome) => gnome.age < min ? gnome.age : min, gnomes[0].age);
+        maxAge = gnomes.reduce((max, gnome) => gnome.age > max ? gnome.age : max, gnomes[0].age);
 
-    /* Weight*/
-    const minWeight = gnomes.reduce((min, gnome) => gnome.weight < min ? gnome.weight : min, gnomes[0].weight);
-    const maxWeight = gnomes.reduce((max, gnome) => gnome.weight > max ? gnome.weight : max, gnomes[0].weight);
+        /* Weight*/
+        minWeight = gnomes.reduce((min, gnome) => gnome.weight < min ? gnome.weight : min, gnomes[0].weight);
+        maxWeight = gnomes.reduce((max, gnome) => gnome.weight > max ? gnome.weight : max, gnomes[0].weight);
 
-    /* Height*/
-    const minHeight = gnomes.reduce((min, gnome) => Math.round(gnome.height) < min ? Math.round(gnome.height) : min, Math.round(gnomes[0].height));
-    const maxHeight = gnomes.reduce((max, gnome) => Math.round(gnome.height) > max ? Math.round(gnome.height) : max, Math.round(gnomes[0].height));
-
-
-
-
-    const onSubmit = values => {
-        console.log(values);
-    };
-
-
-
-
+        /* Height*/
+        minHeight = gnomes.reduce((min, gnome) => Math.round(gnome.height) < min ? Math.round(gnome.height) : min, Math.round(gnomes[0].height));
+        maxHeight = gnomes.reduce((max, gnome) => Math.round(gnome.height) > max ? Math.round(gnome.height) : max, Math.round(gnomes[0].height));
+    }
 
 
     /* When is clicked Button Filter, Toggled Form */
@@ -61,7 +56,49 @@ export const GnomeFilter = (params) => {
 
 
 
-    console.log(params.setDataForm)
+    const onSubmit = values => {
+        console.log(values);
+        console.log('here is my gnomes prefilter')
+        console.log(gnomes)
+
+        /* Set gnomesFilter with all Gnomes */
+        let gnomesFilter = gnomes
+
+        /* Filter by city */
+        if (values.city.value !== "0") {
+            gnomesFilter = gnomesFilter.filter(gnome => gnome.city === values.city.label);
+        }
+
+        /* Filter by name */
+        if (values.name.trim() !== '') {
+            gnomesFilter = gnomesFilter.filter(gnome => gnome.name === values.name);
+        }
+
+        /* Filter by Gender */
+        if (values.gender.value !== "0") {
+            gnomesFilter = gnomesFilter.filter(gnome => gnome.gender === values.gender.label);
+        }
+
+        /* Filter by  Age */
+        gnomesFilter = gnomesFilter.filter(gnome => gnome.age >= values.ageMin);
+        gnomesFilter = gnomesFilter.filter(gnome => gnome.age <= values.ageMax);
+
+
+        /* Filter by  Weight */
+        gnomesFilter = gnomesFilter.filter(gnome => gnome.weight >= values.weightMin);
+        gnomesFilter = gnomesFilter.filter(gnome => gnome.weight <= values.weightMax);
+
+
+        /* Filter by  Height */
+        const min = parseInt(values.heightMin, 10); 
+        const max = parseInt(values.heightMax, 10); 
+
+        gnomesFilter = gnomesFilter.filter(gnome => gnome.height >= min);
+        gnomesFilter = gnomesFilter.filter(gnome => gnome.height <= max);
+        params.setGnomes(gnomesFilter)
+
+    };
+
     return (
         <div className={styleShowForm}>
             <form onSubmit={handleSubmit(onSubmit)} className="row">
@@ -76,10 +113,10 @@ export const GnomeFilter = (params) => {
                         <RHFInput
                             as={<Select options={optionsCities} />}
                             rules={{ required: true }}
-                            name="gender"
-                            defaultValue={optionsCities[0]}
+                            name="city"
                             register={register}
-                            setValue={setValueCity}
+                            setValue={setValue}
+                            defaultValue={optionsCities[0]}
                         />
                     </div>
 
@@ -98,7 +135,8 @@ export const GnomeFilter = (params) => {
                             rules={{ required: true }}
                             name="gender"
                             register={register}
-                            setValue={setValueGender}
+                            setValue={setValue}
+                            defaultValue={optionsCities[0]}
                         />
                     </div>
 
@@ -112,10 +150,10 @@ export const GnomeFilter = (params) => {
                             <label htmlFor="age">Age </label>
                         </div>
                         <div className="inputAge">
-                            <input name="age" className="form-control filterInputNumber" type="number" ref={register}
-                                defaultValue={minAge} min={minAge} max={maxAge} />to
-                    <input name="age" className="form-control filterInputNumber" type="number" ref={register}
-                                defaultValue={maxAge} min={minAge} max={maxAge} />
+                            <input name="ageMin" className="form-control filterInputNumber" type="number" ref={register}
+                                defaultValue={minAge} />to
+                    <input name="ageMax" className="form-control filterInputNumber" type="number" ref={register}
+                                defaultValue={maxAge} />
                         </div>
                     </div>
 
@@ -127,9 +165,9 @@ export const GnomeFilter = (params) => {
                         </div>
                         <div className="inputWeight">
                             <input name="weightMin" className="form-control filterInputNumber" type="number" ref={register}
-                                defaultValue={minWeight} min={minWeight} max={maxWeight} />To
-                    <input name="WeightMax" className="form-control filterInputNumber" type="number" ref={register}
-                                defaultValue={maxWeight} min={minWeight} max={maxWeight} />
+                                defaultValue={minWeight} />To
+                    <input name="weightMax" className="form-control filterInputNumber" type="number" ref={register}
+                                defaultValue={maxWeight} />
                         </div>
                     </div>
 
@@ -141,10 +179,10 @@ export const GnomeFilter = (params) => {
                         </div >
                         <div className="inputHeight">
                             <input name="heightMin" className="form-control filterInputNumber" type="number" ref={register}
-                                defaultValue={minHeight} min={minHeight} max={maxHeight} />To
+                                defaultValue={minHeight} />To
 
                             <input name="heightMax" className="form-control filterInputNumber" type="number" ref={register}
-                                defaultValue={maxHeight} min={minHeight} max={maxHeight} />
+                                defaultValue={maxHeight} />
                         </div>
                     </div>
                     <Button type="submit" className="col-md-1 submitFilter">Apply Filter</Button>
