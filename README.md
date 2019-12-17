@@ -106,9 +106,7 @@ Then it will try a production build.
 - [React](http://facebook.github.io/react) is used for UI.
 
 ### CSS
-
-- [cssnext](http://cssnext.putaindecode.io) is used to write futureproof CSS for CSS vendor prefix under the hood).
-
+- [sass](https://sass-lang.com/) Sass is the most mature, stable, and powerful professional grade CSS extension language in the world. 
 ### Static server with Livereload
 
 The app embed for development a static connect server with livereload plugged.
