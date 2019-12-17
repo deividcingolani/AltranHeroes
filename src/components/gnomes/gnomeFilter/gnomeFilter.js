@@ -125,7 +125,7 @@ export const GnomeFilter = (params) => {
         }
 
         /* Filter by Gender */
-        if (params.gender && params.gender !== "0") {
+        if (params.gender && params.gender !== "") {
             gnomesFilter = gnomesFilter.filter(gnome => gnome.gender === params.gender);
 
         }
