@@ -6,7 +6,7 @@ function gnomesReducer(state = {}, action) {
             state = JSON.parse(JSON.stringify(action.payload));
             return state;
         default:
-            return state
+           return state;
     }
 }
 

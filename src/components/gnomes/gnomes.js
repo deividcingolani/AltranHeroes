@@ -24,7 +24,7 @@ import styled from 'styled-components'
 import './gnomes.css'
 import { GnomeFilter } from './gnomeFilter/gnomeFilter';
 import { useState } from 'react';
-import useQueryString from "../../useQueryString";
+import useQueryString from "../../vendor/useQueryString";
 
 
 

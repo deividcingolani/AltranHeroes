@@ -1,4 +1,4 @@
-import { SET_GNOME } from './actions';
+import { SET_GNOME } from './actionsTypes';
 
 const setGnomes = (gnomes) => {
     return {
