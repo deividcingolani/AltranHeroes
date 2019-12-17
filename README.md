@@ -6,7 +6,8 @@ For solution this issue, this app give they all information about gnomes of the 
 
 ## Versions
 - [1.0](http://altran.herokuapp.com/) This is the actual version on production.
-
+## Versions
+https://github.com/deividcingolani/AltranHeroes/blob/master/LICENSE
 ## fixs and functionalities to Add
 - When the page set the params of filters Gnomes, dont change the url with this params
 - When the select of City of Gnome change, it dont change nothing. This is because now there is a only city, but I think when there are more than 1 city.
