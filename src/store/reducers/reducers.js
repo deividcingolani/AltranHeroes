@@ -1,4 +1,4 @@
-import { SET_GNOME } from '../actions/actions';
+import { SET_GNOME } from '../actions/actionsTypes';
 
 function gnomesReducer(state = {}, action) {
     switch (action.type) {

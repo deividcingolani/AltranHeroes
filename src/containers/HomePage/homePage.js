@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal'
 import './homePage.css';
-import { connect } from 'react-redux';
 import { getGnomes, getUrlGnomes } from '../../axios/requests';
 import Gnomes from '../../components/gnomes/gnomes'
 import GnomeForm from '../../components/gnomes/gnome/gnome'
@@ -11,7 +10,7 @@ const queryString = require('query-string');
 
 
 
-function HomePage(props) {
+export function HomePage(props) {
     const [openModalGnome, setOpenModalGnome] = useState(false);
     const [initialized, setInitialized] = useState(false);
     const [selectedGnome, setSelectedGnome] = useState({});
@@ -105,13 +104,3 @@ function HomePage(props) {
 
 
 
-const mapStateToProps = state => {
-    return {
-        gnomes: state.gnomes,
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    null
-)(HomePage);

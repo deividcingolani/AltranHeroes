@@ -58,7 +58,7 @@ function Gnome({
 
             <div className="form-group col-md-6" >
                 <label htmlFor="professions" className="label nameLabel">Professions</label>
-                <select multiple className="form-control selectModal" id="professions" disabled>
+                <select multiple className="form-control selectModal" id="professions">
                     {data.professions.map((profession,i) => (<option key={i}>{profession}</option>))}
                 </select>
             </div>
