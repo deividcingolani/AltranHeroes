@@ -76,7 +76,7 @@ function Gnome({
 
 
                 <select multiple className="form-control selectModal" id="friends" >
-                    {data.friends.map((friends,i) => (<option onClick={onClickFriends} value={friends} key={i}>{friends}</option>))}
+                    {data.friends.map((friends,i) => (<option onClick={onClickFriends} onChange={onClickFriends} value={friends} key={i}>{friends}</option>))}
                 </select>
 
             </div>
