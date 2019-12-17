@@ -4,6 +4,25 @@ This is an application for a team who is playing a fantasy role-playing game and
 
 For solution this issue, this app give they all information about gnomes of the city.
 
+## Versions
+- [1.0](http://altran.herokuapp.com/) This is the actual version on production.
+
+## fixs and next functionalities
+- When the page set the params of filters Gnomes, dont change the url with this params
+- When the select of City of Gnome change, it dont change nothing. This is because now there is a only city, but I think when there are more than 1 city.
+- to Add backend of app, because with this there will be a posibily for add more gnome, edit and delete gnome.
+- to Add backend for login each heroes and get his cities.
+- to Fix select of Friends for mobile, because in some mobiles when is click in select, this dont show options, and sometimes when the options are showing dont do nothing.
+-To fix when is settings filters gender in url
+-To add profile of Heroe
+
+## Decision core
+- how table of gnomes is responsive I was need take a decision about the count of column to show, and my decision was hidden the column about details of gnomes, because I think when a heroe is show the table, he need a quickly information about name and city of gnome, and the other information is more as details.
+- For show the details of gnomes, I decide use a modal because is more easy for read the information and navigate between friends.
+- For table, I use component React-Table because with this I can use pagination and ordering more easy and quicly, but filters are building outside of table because when if I try put the filters inside of my table there are showing in relation with header and is not clean for a quicly lecture.
+- I add a functionality where a user can use a filters and page with query-string as 
+    https://altran.herokuapp.com/?gender=male
+-When change the page update the url because the heroe can share this url with other heroe.
 
 ## Requirements
 
