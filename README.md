@@ -1,5 +1,5 @@
 
-# PROJECT AltranHeroes
+# PROJECT Altran Heroes
 This is an application for a team who is playing a fantasy role-playing game and every time the heroes they play arrive at a town, they have the issue. They don't know the local population and what they can do to help them on their adventures. 
 
 For solution this issue, this app give they all information about gnomes of the city.
