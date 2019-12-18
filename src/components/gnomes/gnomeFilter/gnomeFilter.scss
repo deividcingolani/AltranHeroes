@@ -1,101 +1,87 @@
-@import "../../../styled/variables.scss"; 
+@import "../../../styled/variables.scss";
 
 .row {
-    display: flex;
-    
-
+  display: flex;
 }
 
-
 .row.second-line {
-    justify-content: flex-start;
-  }
-  
-  .row.first-line {
-    justify-content: flex-start;
-  }
-  
-  .submitButtonFilter{
-      border-radius: 5rem;
-  }
+  justify-content: flex-start;
+}
+
+.row.first-line {
+  justify-content: flex-start;
+}
+
+.submitButtonFilter {
+  border-radius: 5rem;
+}
 /* Css of Header of container Gnomes */
 .divButtonFilter {
-    margin-right: 2rem;
+  margin-right: 2rem;
 }
 
 .buttonsHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .resultsGnomes {
-    margin-top: .5rem;
-    margin-right: 2rem;
+  margin-top: 0.5rem;
+  margin-right: 2rem;
 }
-
 
 /* Inline #19 | http://localhost:3000/ */
 .submitFilter {
-    width: 20rem;
-    height: 3.5rem;
-    margin-left: 5rem;
-    margin-top: 3rem;
+  width: 20rem;
+  height: 3.5rem;
+  margin-left: 5rem;
+  margin-top: 3rem;
 }
-
 
 /* filter */
 
 .inputAge,
 .inputWeight,
 .inputHeight {
-    display: flex;
-    justify-content: space-around;
-    margin-left: -1rem;
+  display: flex;
+  justify-content: space-around;
+  margin-left: -1rem;
 }
 
 .form-control.filterInputNumber {
-    padding: 3px;
+  padding: 3px;
 }
 
 .labelAge,
 .labelWeight,
 .labelHeight {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-
 
 .form-control.filterInputNumber {
-
-    width: 40% !important;
-    text-align: center;
-
+  width: 40% !important;
+  text-align: center;
 }
-
 
 @media only screen and (min-width: $bp-medium) {
-    .divButtonFilter {
-        display: none;
-    }
-    
+  .divButtonFilter {
+    display: none;
+  }
 }
 
-
 .row.first-line {
-    justify-content: space-evenly;
+  justify-content: space-evenly;
 }
 
 .row.second-line {
-    justify-content: space-evenly;
+  justify-content: space-evenly;
 }
 
-
-
 .submit.btn.btn-primary {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    margin-top: 2rem;
-  }
-  
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 2rem;
+}

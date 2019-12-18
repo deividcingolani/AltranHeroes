@@ -1,22 +1,18 @@
-.Closed, .Open{
+.Closed,
+.Open {
+  display: block;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .Closed {
+    display: none;
+  }
+
+  .Open {
     display: block;
     margin-bottom: 2rem;
     margin-top: 2rem;
-}
-
-
-@media only screen and (max-width: 800px) {
-    .Closed{
-        display: none;
-    }
-    
-    .Open{
-        display: block;
-        margin-bottom: 2rem;
-        margin-top: 2rem;
-    
-    }
-    
-    
-    
+  }
 }

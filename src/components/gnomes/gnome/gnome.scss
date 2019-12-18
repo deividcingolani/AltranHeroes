@@ -1,60 +1,55 @@
-@import "../../../styled/variables.scss"; 
+@import "../../../styled/variables.scss";
 
 .gnomeDetail .form-control {
-    background-color: #e2e1e1;
+  background-color: #e2e1e1;
 }
 
 .gnomeDetail .form-control:focus {
-    background-color: #e2e1e1;
+  background-color: #e2e1e1;
 }
 
 .img-thumbnail.form-thumbnail {
-    width: 15rem;
-    height: 15rem;
+  width: 15rem;
+  height: 15rem;
 }
 
 .img-thumbnail.form-thumbnail {
-    margin: auto;
-    display: block;
+  margin: auto;
+  display: block;
 }
 
 .buttonForm {
-    margin: auto;
+  margin: auto;
 }
 
 .titleModalDetail {
-    left: 33%;
+  left: 33%;
 }
 
 .iconHelp {
-    transform: scale(1.2);
-    margin-left: 1rem;
+  transform: scale(1.2);
+  margin-left: 1rem;
 }
 
 .divHelp {
-    display: none;
+  display: none;
 }
 
-.iconHelp:hover+.divHelp {
-    display: block;
+.iconHelp:hover + .divHelp {
+  display: block;
 }
-
 
 @media only screen and (max-width: $bp-medium) {
-
-    .titleModalDetail {
-        left: 25%;
-    }
+  .titleModalDetail {
+    left: 25%;
+  }
 }
 
 @media only screen and (max-width: $bp-smallest) {
-
-    .titleModalDetail {
-        left: 0%;
-    }
-    .modal-title {
-
-        font-size: 2rem !important;
-       }
-       
+  .titleModalDetail {
+    left: 0%;
+  }
+  .modal-title {
+    font-size: 2rem !important;
+  }
 }

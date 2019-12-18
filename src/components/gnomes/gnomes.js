@@ -1,12 +1,12 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { GnomeFilter } from '../index';
-import { useState } from 'react';
+import React from "react";
+import { useSelector } from "react-redux";
+import { GnomeFilter } from "../index";
+import { useState } from "react";
 import useQueryString from "../../vendor/useQueryString";
 
 /* Import Components Bootstrap */
-import { Table as TableBootstrap } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Table as TableBootstrap } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 /* Import Table */
 
@@ -15,19 +15,16 @@ import {
   usePagination,
   useSortBy,
   useExpanded,
-  useRowSelect,
-} from 'react-table'
+  useRowSelect
+} from "react-table";
 
 /* Icons */
 import { FaRegWindowRestore, FaFilter } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-
 /* Styles */
-import styled from 'styled-components'
-import './gnomes.scss'
-
-
+import styled from "styled-components";
+import "./gnomes.scss";
 
 const Styles = styled.div`
   padding: 1rem;
@@ -69,18 +66,14 @@ const Styles = styled.div`
   .pagination {
     padding: 0.5rem;
   }
-  .img-thumbnail{
+  .img-thumbnail {
     height: 100px;
 
     width: 100px;
   }
+`;
 
-
-`
-
-
-function Table({ columns, data,  params }) {
-
+function Table({ columns, data, params }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -95,53 +88,44 @@ function Table({ columns, data,  params }) {
     nextPage,
     previousPage,
     setPageSize,
-    state: { pageIndex, pageSize },
+    state: { pageIndex, pageSize }
   } = useTable(
     {
       columns,
       data,
-      initialState: { pageIndex: 0 },
-
-
+      initialState: { pageIndex: 0 }
     },
     useSortBy,
     useExpanded,
     usePagination,
     useRowSelect
-  )
+  );
 
   const [showFormFilter, setShowFormFilter] = useState(false);
   // eslint-disable-next-line
   const [valuePage, onSetValuePage] = useQueryString("page");
 
   const onClickFilter = () => {
-    setShowFormFilter(!showFormFilter)
-  }
-
-
-  
+    setShowFormFilter(!showFormFilter);
+  };
 
   /* Clicks of Pagination */
-  const onClickgotoPage = (value) => {
-    gotoPage(value)
-    onSetValuePage(value + 1)
-  }
+  const onClickgotoPage = value => {
+    gotoPage(value);
+    onSetValuePage(value + 1);
+  };
 
   const onClickpreviousPage = () => {
-    onSetValuePage(pageIndex + 2)
+    onSetValuePage(pageIndex + 2);
 
-    previousPage()
-
-  }
+    previousPage();
+  };
 
   const onClicknextPage = () => {
+    onSetValuePage(pageIndex + 2);
 
-    onSetValuePage(pageIndex + 2)
-
-    nextPage()
-  }
-
-
+    nextPage();
+  };
 
   return (
     <>
@@ -161,14 +145,12 @@ function Table({ columns, data,  params }) {
           </Button>
         </div>
 
-
-
         {/* Select of Row per page */}
         <div id="pageSize">
           <select
             value={pageSize}
             onChange={e => {
-              setPageSize(Number(e.target.value))
+              setPageSize(Number(e.target.value));
             }}
           >
             {[5, 10, 20, 30, 40, 50].map(pageSize => (
@@ -176,175 +158,175 @@ function Table({ columns, data,  params }) {
                 Show {pageSize}
               </option>
             ))}
-          </select> entries
+          </select>{" "}
+          entries
+        </div>
       </div>
-
-
-      </div>
-      <div className='filterGnomeDesktop'>
-        <GnomeFilter 
+      <div className="filterGnomeDesktop">
+        <GnomeFilter
           showFormFilter={showFormFilter}
           onClick={onClickFilter}
-          gotoPage={gotoPage} />
+          gotoPage={gotoPage}
+        />
       </div>
       {/* Render Table of Gnomes */}
-      <TableBootstrap {...getTableProps()} responsive striped hover >
-
+      <TableBootstrap {...getTableProps()} responsive striped hover>
         <thead className="thead-dark">
           {headerGroups.map(headerGroup => (
-
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-
                 <th {...column.getHeaderProps()}>
                   <div>
-
                     <span {...column.getSortByToggleProps()}>
-                      {column.render('Header')}
+                      {column.render("Header")}
 
                       {/* Add a sort direction indicator */}
-                      {column.Header !== 'Details' && column.Header !== 'Avatar' ?
-                        column.isSorted
-                          ? column.isSortedDesc
-                            ? ' 🔽'
-                            : ' 🔼'
-                          : <> <IoIosArrowDown /> <IoIosArrowUp /></>
-                        : ''
-                      }
-
+                      {column.Header !== "Details" &&
+                      column.Header !== "Avatar" ? (
+                        column.isSorted ? (
+                          column.isSortedDesc ? (
+                            " 🔽"
+                          ) : (
+                            " 🔼"
+                          )
+                        ) : (
+                          <>
+                            {" "}
+                            <IoIosArrowDown /> <IoIosArrowUp />
+                          </>
+                        )
+                      ) : (
+                        ""
+                      )}
                     </span>
                   </div>
                 </th>
-
               ))}
             </tr>
-
           ))}
         </thead>
 
-        <tbody {...getTableBodyProps()}  >
+        <tbody {...getTableBodyProps()}>
           {page.map(row => {
-            prepareRow(row)
+            prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map(cell => {
                   return (
                     <td {...cell.getCellProps()} className={cell.column.id}>
-                      {cell.render('Cell', { editable: false })}
-
+                      {cell.render("Cell", { editable: false })}
                     </td>
-                  )
+                  );
                 })}
               </tr>
-            )
+            );
           })}
         </tbody>
-
       </TableBootstrap>
 
       {/* Pagination and Page Number */}
       <div className="pagination">
         <div id="paginationButton">
-
-          <button onClick={() => onClickgotoPage(0)} disabled={!canPreviousPage}>
-            {'<<'}
-          </button>{' '}
-          <button onClick={() => onClickpreviousPage()} disabled={!canPreviousPage}>
-            {'<'}
-          </button>{' '}
+          <button
+            onClick={() => onClickgotoPage(0)}
+            disabled={!canPreviousPage}
+          >
+            {"<<"}
+          </button>{" "}
+          <button
+            onClick={() => onClickpreviousPage()}
+            disabled={!canPreviousPage}
+          >
+            {"<"}
+          </button>{" "}
           <button onClick={() => onClicknextPage()} disabled={!canNextPage}>
-            {'>'}
-          </button>{' '}
-          <button onClick={() => onClickgotoPage(pageCount - 1)} disabled={!canNextPage}>
-            {'>>'}
-          </button>{' '}
+            {">"}
+          </button>{" "}
+          <button
+            onClick={() => onClickgotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {">>"}
+          </button>{" "}
         </div>
 
         <div id="paginationGoTo">
-
           <span>
-            Go to page:{' '}
+            Go to page:{" "}
             <input
               id="pageNumber"
               type="number"
               value={pageIndex + 1}
               onChange={e => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0
-                gotoPage(page)
+                const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                gotoPage(page);
               }}
             />
-          </span>{' '}
+          </span>{" "}
         </div>
         <div id="paginationPage">
           <span>
-            Page{' '}
+            Page{" "}
             <strong>
               {pageIndex + 1} of {pageOptions.length}
-            </strong>{' '}
+            </strong>{" "}
           </span>
         </div>
       </div>
-
-
     </>
-  )
+  );
 }
 
 export function Gnomes(params) {
-
   /* Declare columns of my table of Gnomes */
   const columns = React.useMemo(
     () => [
       {
-        id: 'city',
-        Header: 'City',
-        accessor: 'city',
+        id: "city",
+        Header: "City",
+        accessor: "city"
       },
       {
-        id: 'name',
-        Header: 'Name',
-        accessor: 'name',
+        id: "name",
+        Header: "Name",
+        accessor: "name"
       },
       {
-
-        id: 'avatar',
-        Header: 'Avatar',
+        id: "avatar",
+        Header: "Avatar",
         Cell: ({ row }) => (
-          <img className="imageTable img-thumbnail" src={row.original.thumbnail} alt="Avatar" />
-
-        ),
-
+          <img
+            className="imageTable img-thumbnail"
+            src={row.original.thumbnail}
+            alt="Avatar"
+          />
+        )
       },
 
       {
-
-        id: 'age',
-        Header: 'Age',
-        accessor: 'age',
-
+        id: "age",
+        Header: "Age",
+        accessor: "age"
       },
       {
-        id: 'weight',
-        Header: 'Weight',
-        accessor: 'weight',
-
+        id: "weight",
+        Header: "Weight",
+        accessor: "weight"
       },
       {
-        id: 'height',
-        Header: 'Height',
-        accessor: 'height',
+        id: "height",
+        Header: "Height",
+        accessor: "height"
       },
       {
-
-        id: 'gender',
-        Header: 'Gender',
-        accessor: 'gender',
+        id: "gender",
+        Header: "Gender",
+        accessor: "gender"
       },
 
       {
-
-        id: 'details',
-        Header: 'Details',
+        id: "details",
+        Header: "Details",
         Cell: ({ row }) => (
           <Button
             variant="outline-secondary"
@@ -356,23 +338,16 @@ export function Gnomes(params) {
           >
             <FaRegWindowRestore className="iconDetails" />
           </Button>
-        ),
-
-      },
-
+        )
+      }
     ],
     [params]
-  )
-  const gnomes = useSelector(state => state.gnomes.gnomesFilter)
+  );
+  const gnomes = useSelector(state => state.gnomes.gnomesFilter);
 
   return (
     <Styles>
-      <Table
-        columns={columns}
-        data={gnomes}
-        params={params}
-      />
+      <Table columns={columns} data={gnomes} params={params} />
     </Styles>
-  )
+  );
 }
-
