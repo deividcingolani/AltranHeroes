@@ -23,6 +23,8 @@ For solution this issue, this app give they all information about gnomes of the 
 
 ## Decision core
 - how table of gnomes is responsive I was need take a decision about the count of column to show, and my decision was hidden the column about details of gnomes, because I think when a heroe is show the table, he need a quickly information about name and city of gnome, and the other information is more as details.
+- To determine the gender of the gnomes, how do I have no information about the gender, Determine to use Fuction Math.Random for each gnome, and when it returns a number greater than 0.7 it is a female, and when the number is less than and equal to 0.7 It's male.
+
 - For show the details of gnomes, I decide use a modal because is more easy for read the information and navigate between friends.
 - For table, I use component React-Table because with this I can use pagination and ordering more easy and quicly, but filters are building outside of table because when if I try put the filters inside of my table there are showing in relation with header and is not clean for a quicly lecture.
 - I add a functionality where a user can use a filters and page with query-string as 
