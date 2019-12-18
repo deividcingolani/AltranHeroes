@@ -1,4 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { GnomeFilter } from '../index';
+import { useState } from 'react';
+import useQueryString from "../../vendor/useQueryString";
 
 /* Import Components Bootstrap */
 import { Table as TableBootstrap } from 'react-bootstrap';
@@ -22,9 +26,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 /* Styles */
 import styled from 'styled-components'
 import './gnomes.css'
-import { GnomeFilter } from './gnomeFilter/gnomeFilter';
-import { useState } from 'react';
-import useQueryString from "../../vendor/useQueryString";
 
 
 
@@ -78,7 +79,7 @@ const Styles = styled.div`
 `
 
 
-function Table({ columns, data, skipReset, resetData, params }) {
+function Table({ columns, data,  params }) {
 
   const {
     getTableProps,
@@ -100,10 +101,7 @@ function Table({ columns, data, skipReset, resetData, params }) {
       columns,
       data,
       initialState: { pageIndex: 0 },
-      // We also need to pass this so the page doesn't change
-      // when we edit the data.
-      autoResetPage: !skipReset,
-      autoResetSelectedRows: !skipReset,
+
 
     },
     useSortBy,
@@ -113,13 +111,15 @@ function Table({ columns, data, skipReset, resetData, params }) {
   )
 
   const [showFormFilter, setShowFormFilter] = useState(false);
-  const [dataForm, setDataForm] = useState(data);
+  // eslint-disable-next-line
   const [valuePage, onSetValuePage] = useQueryString("page");
 
   const onClickFilter = () => {
     setShowFormFilter(!showFormFilter)
   }
 
+
+  
 
   /* Clicks of Pagination */
   const onClickgotoPage = (value) => {
@@ -182,12 +182,9 @@ function Table({ columns, data, skipReset, resetData, params }) {
 
       </div>
       <div className='filterGnomeDesktop'>
-        <GnomeFilter gnomes={dataForm}
-          setGnomes={setDataForm}
+        <GnomeFilter 
           showFormFilter={showFormFilter}
-          resetData={resetData}
           onClick={onClickFilter}
-          paramsUrl={params.paramsUrl}
           gotoPage={gotoPage} />
       </div>
       {/* Render Table of Gnomes */}
@@ -293,7 +290,7 @@ function Table({ columns, data, skipReset, resetData, params }) {
   )
 }
 
-function Gnomes(params) {
+export function Gnomes(params) {
 
   /* Declare columns of my table of Gnomes */
   const columns = React.useMemo(
@@ -366,44 +363,16 @@ function Gnomes(params) {
     ],
     [params]
   )
-
-  const [data, setData] = React.useState(() => params.gnomes)
-
-  // We need to keep the table from resetting the pageIndex when we
-  // Update data. So we can keep track of that flag with a ref.
-  const skipResetRef = React.useRef(false)
-
-
-  // After data chagnes, we turn the flag back off
-  // so that if data actually changes when we're not
-  // editing it, the page is reset
-  React.useEffect(() => {
-    skipResetRef.current = false
-  }, [data])
-
-  // Let's add a data resetter/randomizer to help
-  // illustrate that flow...
-  const resetData = (gnomes) => {
-    // Don't reset the page when we do this
-    skipResetRef.current = true
-    setData(gnomes)
-  }
-
-
-
-
+  const gnomes = useSelector(state => state.gnomes.gnomesFilter)
 
   return (
     <Styles>
       <Table
         columns={columns}
-        data={data}
+        data={gnomes}
         params={params}
-        resetData={resetData}
-        skipReset={skipResetRef.current}
       />
     </Styles>
   )
 }
 
-export default Gnomes

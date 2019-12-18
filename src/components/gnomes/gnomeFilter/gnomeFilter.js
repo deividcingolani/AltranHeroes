@@ -5,31 +5,28 @@ import { Button } from "react-bootstrap";
 import { RHFInput } from 'react-hook-form-input';
 import './gnomeFilter.css'
 import './buttonFilter.css'
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from '../../../store/actions/index'
+import { useEffect } from 'react';
 
 import classes from './toggleFilter.module.css'
-import { useState, useEffect } from 'react';
 
 export const GnomeFilter = (params) => {
     const { handleSubmit, register, setValue } = useForm();
-    const [initialized, setInitialized] = useState(false);
+    const initialized = useSelector(state => state.gnomes.initialized)
 
     /* This is for call to get data when the app is not inialized */
     useEffect(() => {
         if (!initialized) {
-            setGnomesFilterInitial()
+            dispatch(actions.initGnomes())
+
         }
     })
 
-    /* This is for set functionct that change page of table */
-    const goToPage=params.gotoPage
+    let gnomes = useSelector(state => state.gnomes.gnomes)
 
-    /* This is for set function, that change data of table */
-    const resetData = params.resetData
+    const dispatch = useDispatch()
 
-    /* Set gnomes*/
-    const gnomes = params.gnomes
-
-    /* Set options of Selects */
 
     /* Cities */
     const optionsCities = [
@@ -75,65 +72,43 @@ export const GnomeFilter = (params) => {
 
 
     const onSubmit = values => {
-        let gnomesFilter = gnomes
+
         if (values.city.value !== "0") {
-            gnomesFilter = gnomesFilter.filter(gnome => gnome.city === values.city.label);
+            gnomes = gnomes.filter(gnome => gnome.city === values.city.label);
         }
 
         /* Filter by name */
         if (values.name.trim() !== '') {
-            gnomesFilter = gnomesFilter.filter(gnome => gnome.name === values.name);
+            gnomes = gnomes.filter(gnome => gnome.name === values.name);
         }
 
         /* Filter by Gender */
         if (values.gender.value !== "0") {
-            gnomesFilter = gnomesFilter.filter(gnome => gnome.gender === values.gender.label);
+            gnomes = gnomes.filter(gnome => gnome.gender === values.gender.label);
         }
 
         /* Filter by  Age */
-        gnomesFilter = gnomesFilter.filter(gnome => gnome.age >= values.ageMin);
-        gnomesFilter = gnomesFilter.filter(gnome => gnome.age <= values.ageMax);
+        gnomes = gnomes.filter(gnome => gnome.age >= values.ageMin);
+        gnomes = gnomes.filter(gnome => gnome.age <= values.ageMax);
 
 
         /* Filter by  Weight */
-        gnomesFilter = gnomesFilter.filter(gnome => gnome.weight >= values.weightMin);
-        gnomesFilter = gnomesFilter.filter(gnome => gnome.weight <= values.weightMax);
+        gnomes = gnomes.filter(gnome => gnome.weight >= values.weightMin);
+        gnomes = gnomes.filter(gnome => gnome.weight <= values.weightMax);
 
         /* Filter by  Height */
         const min = parseInt(values.heightMin, 10);
         const max = parseInt(values.heightMax, 10);
 
-        gnomesFilter = gnomesFilter.filter(gnome => gnome.height >= min);
-        gnomesFilter = gnomesFilter.filter(gnome => gnome.height <= max);
+        gnomes = gnomes.filter(gnome => gnome.height >= min);
+        gnomes = gnomes.filter(gnome => gnome.height <= max);
 
-        resetData(gnomesFilter)
+        dispatch(actions.setGnomesFilter(gnomes))
 
 
     };
 
 
-
-    const setGnomesFilterInitial = () => {
-        setInitialized(true)
-
-        params = params.paramsUrl
-        let gnomesFilter = gnomes
-
-        /* Filter by name */
-        if (params.name && params.name.trim() !== '') {
-            gnomesFilter = gnomesFilter.filter(gnome => gnome.name === params.name);
-        }
-
-        /* Filter by Gender */
-        if (params.gender && params.gender !== "") {
-            gnomesFilter = gnomesFilter.filter(gnome => gnome.gender === params.gender);
-
-        }
-
-
-
-        resetData(gnomesFilter)
-    };
 
 
 
@@ -142,50 +117,13 @@ export const GnomeFilter = (params) => {
 
     let citySelected
     let genderSelected;
-    let name;
+    citySelected = optionsCities[0]
+    genderSelected = optionsGender[0]
 
 
-    /* Set  Initial Value  */
-    if (!initialized) {
 
-        /* Gender */
-        if (params.paramsUrl && params.paramsUrl.city) {
-            const index = optionsCities.filter(option => option.label.toLowerCase() === params.paramsUrl.city.toLowerCase())
-
-            if (index && index[0]) {
-                citySelected = optionsCities[index[0].value]
-            } else {
-                citySelected = optionsCities[0]
-            }
-        } else {
-            citySelected = optionsCities[0]
-        }
-
-
-        /* Gender */
-        if (params.paramsUrl && params.paramsUrl.gender) {
-            const index = optionsGender.filter(option => option.label.toLowerCase() === params.paramsUrl.gender.toLowerCase())
-
-            if (index && index[0]) {
-                genderSelected = optionsGender[index[0].value]
-            } else {
-                genderSelected = optionsGender[0]
-            }
-        } else {
-            genderSelected = optionsGender[0]
-        }
-
-
-        if (params.paramsUrl && params.paramsUrl.name && !initialized) {
-            name = params.paramsUrl.name
-        } else {
-            name = ""
-        }
-
-        if(params.paramsUrl && params.paramsUrl.page && !initialized){
-            const goPage = params.paramsUrl.page -1
-            goToPage(goPage)
-        }
+    const onClickFriend = () => {
+        console.log('here')
     }
 
     return (
@@ -228,7 +166,7 @@ export const GnomeFilter = (params) => {
                         {/* Name */}
                         <div className="form-group  col-md-5">
                             <label htmlFor="name">Name</label>
-                            <input name="name" className="form-control" type="text" ref={register} defaultValue={name} />
+                            <input name="name" className="form-control" type="text" ref={register} />
                         </div>
 
                     </div>
@@ -281,7 +219,7 @@ export const GnomeFilter = (params) => {
                     </div>
                 </div>
                 <div className="buttonSubmit col-sm-12 col-md-3 col-lg-3 col-xl-2">
-                    <Button type="submit" className="col-sm-12 col-lg-8 submitButtonFilter btn-text" onClick={params.onClick}>Apply Filter</Button>
+                    <Button type="submit" className="col-sm-12 col-lg-8 submitButtonFilter btn-text" onClick={onClickFriend}>Apply Filter</Button>
                 </div>
 
             </form>

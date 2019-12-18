@@ -2,17 +2,20 @@ import React from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import './gnome.css'
 import { FiHelpCircle } from "react-icons/fi";
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from '../../../store/actions/index'
 
 
 
-function Gnome({
-    onCloseModal,
-    gnome,
-    onClickFriends
+export function Gnome({onCloseModal}) {
+    const data = useSelector(state => state.gnomes.gnomeSelected)
+    const gnomes = useSelector(state => state.gnomes.gnomes)
+    const dispatch = useDispatch()
 
-}) {
-    const data = gnome
-
+    const onClickFriends =(e)=>{
+         const gnomeFriend = gnomes.filter(gnome=>(gnome.name===e.target.value))[0]
+         dispatch(actions.setGnomeSelected(gnomeFriend))
+    }
     return (
         <div className="form gnomeDetail row" readOnly>
             <div className="form-group col-md-4">
@@ -85,4 +88,4 @@ function Gnome({
 
     );
 }
-export default Gnome
+
