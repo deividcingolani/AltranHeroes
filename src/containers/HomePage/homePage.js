@@ -1,11 +1,11 @@
-import React from 'react';
-import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal'
-import './homePage.css';
-import { Gnomes, Gnome } from '../../components/index'
-
+import React,{ useState } from 'react';
 import {  useDispatch } from 'react-redux'
+
+import Modal from 'react-bootstrap/Modal'
+import { Gnomes, Gnome } from '../../components/index'
 import * as actions from '../../store/actions/index'
+
+import './homePage.scss';
 
 
 export function HomePage() {

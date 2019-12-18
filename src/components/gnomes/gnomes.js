@@ -25,7 +25,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 /* Styles */
 import styled from 'styled-components'
-import './gnomes.css'
+import './gnomes.scss'
 
 
 

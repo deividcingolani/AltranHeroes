@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import './gnome.css'
+import './gnome.scss'
 import { FiHelpCircle } from "react-icons/fi";
 import { useSelector, useDispatch } from 'react-redux'
 import * as actions from '../../../store/actions/index'

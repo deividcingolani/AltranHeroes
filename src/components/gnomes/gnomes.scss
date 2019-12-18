@@ -1,0 +1,199 @@
+@import "../../styled/variables.scss";
+
+/* CSS of Table */
+
+.table .thead-dark th {
+    text-align: center;
+}
+
+.table {
+    font-size: 1.2rem;
+}
+
+.table {
+    text-align: center;
+
+}
+
+
+.egReQt .img-thumbnail {
+    width: 5rem;
+    height: 5rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+#paginationButton {
+    margin-right: 4rem;
+}
+
+#paginationGoTo {
+    margin-right: 4rem;
+}
+
+
+.avatar img {
+    width: 5rem !important;
+    height: 5rem !important;
+}
+
+.iconDetails {
+    width: 2rem;
+    height: 2rem;
+}
+
+
+
+@media only screen and (max-width: $bp-smallest) {
+
+    th:nth-child(1),
+    th:nth-child(3),
+    th:nth-child(4),
+    th:nth-child(5),
+    th:nth-child(6),
+    th:nth-child(7) {
+        display: none
+    }
+
+    td:nth-child(1),
+    td:nth-child(3),
+    td:nth-child(4),
+    td:nth-child(5),
+    td:nth-child(6),
+    td:nth-child(7) {
+        display: none
+    }
+
+    #pageNumber {
+        width: 7rem !important;
+    }
+
+    #paginationGoTo {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 1rem;
+        margin-left: 1rem !important;
+    }
+
+    .city,
+    .name {
+        font-size: 1.4rem;
+    }
+
+    .iconDetails {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+
+@media only screen and (max-width: $bp-small) {
+
+
+    th:nth-child(7),
+    th:nth-child(4),
+    th:nth-child(5),
+    th:nth-child(6) {
+        display: none
+    }
+
+    td:nth-child(7),
+    td:nth-child(4),
+    td:nth-child(5),
+    td:nth-child(6) {
+        display: none
+    }
+
+
+}
+
+
+@media only screen and (max-width:$bp-medium) {
+
+    .table {
+        font-size: 1.4rem;
+    }
+
+    th:nth-child(7),
+    th:nth-child(4),
+    th:nth-child(5),
+    th:nth-child(6) {
+        display: none
+    }
+
+    td:nth-child(7),
+    td:nth-child(4),
+    td:nth-child(5),
+    td:nth-child(6) {
+        display: none
+    }
+
+    .pagination {
+        height: 10rem;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    #paginationButton {
+        height: 10rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        margin-top: 3rem;
+    }
+
+    #paginationButton button {
+        margin-left: 3rem;
+        height: 4rem;
+        transform: scaleX(1.5);
+
+
+    }
+
+    #paginationGoTo {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 1rem;
+        margin-left: 7rem;
+    }
+
+    #paginationPage {
+        display: flex;
+        margin-left: -7.5rem;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+}
+
+.iconHelp:hover {
+    background-color: gray;
+    border-radius: 1rem;
+}
+
+.selectModal {
+    height: 15rem !important;
+}
+
+@media only screen and (min-width:$bp-large) {
+
+    #paginationButton {
+
+        transform: scale(1.5);
+
+    }
+}
+
+@media only screen and (max-width: $bp-large) and (min-width:$bp-medium) {
+    #paginationButton {
+
+        transform: scaleX(2) scaleY(0.8);
+
+    }
+}

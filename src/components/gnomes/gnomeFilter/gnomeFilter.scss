@@ -1,3 +1,5 @@
+@import "../../../styled/variables.scss"; 
+
 .row {
     display: flex;
     
@@ -14,11 +16,11 @@
   }
   
   .submitButtonFilter{
-      border-radius: 50px;
+      border-radius: 5rem;
   }
 /* Css of Header of container Gnomes */
 .divButtonFilter {
-    margin-right: 20px;
+    margin-right: 2rem;
 }
 
 .buttonsHeader {
@@ -28,17 +30,17 @@
 }
 
 .resultsGnomes {
-    margin-top: 5px;
-    margin-right: 20px;
+    margin-top: .5rem;
+    margin-right: 2rem;
 }
 
 
 /* Inline #19 | http://localhost:3000/ */
 .submitFilter {
-    width: 200px;
-    height: 35px;
-    margin-left: 50px;
-    margin-top: 30px;
+    width: 20rem;
+    height: 3.5rem;
+    margin-left: 5rem;
+    margin-top: 3rem;
 }
 
 
@@ -49,7 +51,7 @@
 .inputHeight {
     display: flex;
     justify-content: space-around;
-    margin-left: -10px;
+    margin-left: -1rem;
 }
 
 .form-control.filterInputNumber {
@@ -72,7 +74,7 @@
 }
 
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: $bp-medium) {
     .divButtonFilter {
         display: none;
     }
@@ -94,6 +96,6 @@
     display: flex;
     justify-content: center;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 2rem;
   }
   
