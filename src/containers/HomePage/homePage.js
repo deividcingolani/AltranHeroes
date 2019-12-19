@@ -9,7 +9,6 @@ export function HomePage() {
   const [openModalGnome, setOpenModalGnome] = useState(false);
   const [gnomeSelected, setGnomeSelected] = useState({});
 
-
   const openModal = row => {
     setGnomeSelected(row.original);
     setOpenModalGnome(true);
@@ -30,7 +29,7 @@ export function HomePage() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Gnome onCloseModal={closeModal} gnomeSelected={gnomeSelected}/>
+          <Gnome onCloseModal={closeModal} gnomeSelected={gnomeSelected} />
         </Modal.Body>
       </Modal>
 
