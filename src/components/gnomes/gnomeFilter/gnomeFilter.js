@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useForm from "react-hook-form";
 import Select from "react-select";
 import { Button } from "react-bootstrap";
@@ -7,9 +7,6 @@ import "./gnomeFilter.scss";
 import "./buttonFilter.scss";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../../store/actions/index";
-import { useEffect } from "react";
-
-import classes from "./toggleFilter.module.css";
 
 export const GnomeFilter = params => {
   const { handleSubmit, register, setValue } = useForm();
@@ -20,15 +17,11 @@ export const GnomeFilter = params => {
   /* This is for call to get data when the app is not inialized */
   useEffect(() => {
     if (!initialized) {
-      InitializacionGnomes()
+      dispatch(actions.initGnomes());
       params.setData(gnomes);
     }
   });
 
-  const InitializacionGnomes=()=>{
-    dispatch(actions.initGnomes());
-    
-  }
   /* Cities */
   const optionsCities = [
     { value: "0", label: "All" },
@@ -68,38 +61,40 @@ export const GnomeFilter = params => {
     /* Height*/
     minHeight = gnomes.reduce(
       (min, gnome) =>
-        Math.round(gnome.height) < min ? Math.round(gnome.height) : min,
-      Math.round(gnomes[0].height)
+        Math.floor(gnome.height) < min ? Math.floor(gnome.height) : min,
+      Math.floor(gnomes[0].height)
     );
     maxHeight = gnomes.reduce(
       (max, gnome) =>
-        Math.round(gnome.height) > max ? Math.round(gnome.height) : max,
-      Math.round(gnomes[0].height)
+        Math.ceil(gnome.height) > max ? Math.ceil(gnome.height) : max,
+      Math.ceil(gnomes[0].height)
     );
   }
+  /* Set default Value */
 
-  /* When is clicked Button Filter, Toggled Form */
-  let styleShowForm;
-  if (params.showFormFilter) {
-    styleShowForm = classes.Open;
-  } else {
-    styleShowForm = classes.Closed;
-  }
+  let citySelected = optionsCities[0];
+  let genderSelected = optionsGender[0];
 
   const onSubmit = values => {
     let gnomestoFilter = gnomes;
     if (values.city.value !== "0") {
-      gnomestoFilter = gnomestoFilter.filter(gnome => gnome.city === values.city.label);
-    }
-
-    /* Filter by name */
-    if (values.name.trim() !== "") {
-      gnomestoFilter = gnomestoFilter.filter(gnome => gnome.name === values.name);
+      gnomestoFilter = gnomestoFilter.filter(
+        gnome => gnome.city === values.city.label
+      );
     }
 
     /* Filter by Gender */
     if (values.gender.value !== "0") {
-      gnomestoFilter = gnomestoFilter.filter(gnome => gnome.gender === values.gender.label);
+      gnomestoFilter = gnomestoFilter.filter(
+        gnome => gnome.gender === values.gender.label
+      );
+    }
+
+    /* Filter by name */
+    if (values.name.trim() !== "") {
+      gnomestoFilter = gnomestoFilter.filter(
+        gnome => gnome.name === values.name
+      );
     }
 
     /* Filter by  Age */
@@ -107,155 +102,152 @@ export const GnomeFilter = params => {
     gnomestoFilter = gnomestoFilter.filter(gnome => gnome.age <= values.ageMax);
 
     /* Filter by  Weight */
-    gnomestoFilter = gnomestoFilter.filter(gnome => gnome.weight >= values.weightMin);
-    gnomestoFilter = gnomestoFilter.filter(gnome => gnome.weight <= values.weightMax);
+    gnomestoFilter = gnomestoFilter.filter(
+      gnome => gnome.weight >= values.weightMin
+    );
+
+    gnomestoFilter = gnomestoFilter.filter(
+      gnome => gnome.weight <= values.weightMax
+    );
 
     /* Filter by  Height */
-    const min = parseInt(values.heightMin, 10);
-    const max = parseInt(values.heightMax, 10);
-
+    let min = parseInt(values.heightMin, 10);
+    let max = parseInt(values.heightMax, 10);
     gnomestoFilter = gnomestoFilter.filter(gnome => gnome.height >= min);
     gnomestoFilter = gnomestoFilter.filter(gnome => gnome.height <= max);
 
+    /* Set Gnomes filter for show in table of gnomes */
     params.setData(gnomestoFilter);
   };
 
-  /* Set default Value */
-
-  let citySelected;
-  let genderSelected;
-  citySelected = optionsCities[0];
-  genderSelected = optionsGender[0];
   return (
-    <div className={styleShowForm}>
-      <form onSubmit={handleSubmit(onSubmit)} className="row formFilter ">
-        {/* Inputs Form */}
-        <div className="inputsForm col-md-9 col-lg-8 col-xl-6">
-          {/* First Line of Filter */}
+    <form onSubmit={handleSubmit(onSubmit)} className="row formFilter ">
+      {/* Inputs Form */}
+      <div className="inputsForm col-md-9 col-lg-8 col-xl-6">
+        {/* First Line of Filter */}
 
-          <div className={" row first-line col-md-12"}>
-            {/* City */}
-            <div className="form-group col-md-4">
-              <label htmlFor="name">City</label>
-              <RHFInput
-                as={<Select options={optionsCities} />}
-                rules={{ required: true }}
-                name="city"
-                register={register}
-                setValue={setValue}
-                defaultValue={citySelected}
-              />
+        <div className={" row first-line col-md-12"}>
+          {/* City */}
+          <div className="form-group col-md-4">
+            <label htmlFor="name">City</label>
+            <RHFInput
+              as={<Select options={optionsCities} />}
+              rules={{ required: true }}
+              name="city"
+              register={register}
+              setValue={setValue}
+              defaultValue={citySelected}
+            />
+          </div>
+
+          {/* Gender */}
+          <div className="form-group gender col-md-3">
+            <label htmlFor="gender">Gender</label>
+            <RHFInput
+              as={<Select options={optionsGender} />}
+              rules={{ required: true }}
+              name="gender"
+              register={register}
+              setValue={setValue}
+              defaultValue={genderSelected}
+            />
+          </div>
+
+          {/* Name */}
+          <div className="form-group  col-md-5">
+            <label htmlFor="name">Name</label>
+            <input
+              name="name"
+              className="form-control"
+              type="text"
+              ref={register}
+            />
+          </div>
+        </div>
+
+        {/* Second line */}
+        <div className="row  second-line col-md-12">
+          {/* Age  */}
+          <div className="form-group col-md-4 form-group-age">
+            <div className="labelAge">
+              <label htmlFor="age">Age </label>
             </div>
-
-            {/* Gender */}
-            <div className="form-group gender col-md-3">
-              <label htmlFor="gender">Gender</label>
-              <RHFInput
-                as={<Select options={optionsGender} />}
-                rules={{ required: true }}
-                name="gender"
-                register={register}
-                setValue={setValue}
-                defaultValue={genderSelected}
-              />
-            </div>
-
-            {/* Name */}
-            <div className="form-group  col-md-5">
-              <label htmlFor="name">Name</label>
+            <div className="inputAge">
               <input
-                name="name"
-                className="form-control"
-                type="text"
+                name="ageMin"
+                className="form-control filterInputNumber"
+                type="number"
                 ref={register}
+                defaultValue={minAge}
+              />
+              To
+              <input
+                name="ageMax"
+                className="form-control filterInputNumber"
+                type="number"
+                ref={register}
+                defaultValue={maxAge}
               />
             </div>
           </div>
 
-          {/* Second line */}
-          <div className="row  second-line col-md-12">
-            {/* Age  */}
-            <div className="form-group col-md-4 form-group-age">
-              <div className="labelAge">
-                <label htmlFor="age">Age </label>
-              </div>
-              <div className="inputAge">
-                <input
-                  name="ageMin"
-                  className="form-control filterInputNumber"
-                  type="number"
-                  ref={register}
-                  defaultValue={minAge}
-                />
-                To
-                <input
-                  name="ageMax"
-                  className="form-control filterInputNumber"
-                  type="number"
-                  ref={register}
-                  defaultValue={maxAge}
-                />
-              </div>
+          {/* Weight */}
+          <div className="form-group form-group-weight col-md-4">
+            <div className="labelWeight">
+              <label htmlFor="weight">Weight</label>
             </div>
-
-            {/* Weight */}
-            <div className="form-group form-group-weight col-md-4">
-              <div className="labelWeight">
-                <label htmlFor="weight">Weight</label>
-              </div>
-              <div className="inputWeight">
-                <input
-                  name="weightMin"
-                  className="form-control filterInputNumber"
-                  type="number"
-                  ref={register}
-                  defaultValue={minWeight}
-                />
-                To
-                <input
-                  name="weightMax"
-                  className="form-control filterInputNumber"
-                  type="number"
-                  ref={register}
-                  defaultValue={maxWeight}
-                />
-              </div>
+            <div className="inputWeight">
+              <input
+                name="weightMin"
+                className="form-control filterInputNumber"
+                type="number"
+                ref={register}
+                defaultValue={minWeight}
+              />
+              To
+              <input
+                name="weightMax"
+                className="form-control filterInputNumber"
+                type="number"
+                ref={register}
+                defaultValue={maxWeight}
+              />
             </div>
+          </div>
 
-            {/* Height */}
-            <div className="form-group form-group-height col-md-4">
-              <div className="labelHeight">
-                <label htmlFor="weight">Height</label>
-              </div>
-              <div className="inputHeight">
-                <input
-                  name="heightMin"
-                  className="form-control filterInputNumber"
-                  type="number"
-                  ref={register}
-                  defaultValue={minHeight}
-                />
-                To
-                <input
-                  name="heightMax"
-                  className="form-control filterInputNumber"
-                  type="number"
-                  ref={register}
-                  defaultValue={maxHeight}
-                />
-              </div>
+          {/* Height */}
+          <div className="form-group form-group-height col-md-4">
+            <div className="labelHeight">
+              <label htmlFor="weight">Height</label>
+            </div>
+            <div className="inputHeight">
+              <input
+                name="heightMin"
+                className="form-control filterInputNumber"
+                type="number"
+                ref={register}
+                defaultValue={minHeight}
+              />
+              To
+              <input
+                name="heightMax"
+                className="form-control filterInputNumber"
+                type="number"
+                ref={register}
+                defaultValue={maxHeight}
+              />
             </div>
           </div>
         </div>
-        <div className="buttonSubmit col-sm-12 col-md-3 col-lg-3 col-xl-2">
-          <Button
-            type="submit"
-            className="col-sm-12 col-lg-8 submitButtonFilter btn-text"
-          >
-            Apply Filter
-          </Button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div className="buttonSubmit col-sm-12 col-md-3 col-lg-3 col-xl-2">
+        <Button
+          type="submit"
+          className="col-sm-12 col-lg-8 submitButtonFilter btn-text"
+        >
+          Apply Filter
+        </Button>
+      </div>
+    </form>
   );
 };
