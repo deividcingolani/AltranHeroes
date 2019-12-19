@@ -1,7 +1,6 @@
 import React from "react";
-
 import Modal from "react-bootstrap/Modal";
-import { Gnome } from "./gnome";
+import { Gnome } from "./Gnome";
 
 export function GnomeModal({ openModalGnome, closeModal, gnomeSelected }) {
   return (

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Gnomes, GnomeModal } from "../../components/index";
-
-import "./homePage.scss";
+import "./HomePage.scss";
 
 export function HomePage() {
   const [openModalGnome, setOpenModalGnome] = useState(false);

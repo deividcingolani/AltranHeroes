@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import "./gnome.scss";
 import { FiHelpCircle } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import "./Gnome.scss";
 
 export function Gnome({ onCloseModal, gnomeSelected }) {
   const [data, setData] = useState(gnomeSelected);
