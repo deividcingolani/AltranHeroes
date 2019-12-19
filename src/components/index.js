@@ -1,4 +1,5 @@
-export { Navigation } from "./Nav/Navigation/navigation";
-export { Gnomes } from "./gnomes/gnomes";
-export { Gnome } from "./gnomes/gnome/gnome";
-export { GnomeFilter } from "./gnomes/gnomeFilter/gnomeFilter";
+export { Navigation } from "./Nav/Navigation/Navigation";
+export { Gnomes } from "./Gnomes/Gnomes";
+export { Gnome } from "./Gnomes/Gnome/gnome";
+export { GnomeModal } from "./Gnomes/Gnome/gnomeModal";
+export { GnomeFilter } from "./Gnomes/GnomeFilter/GnomeFilter";

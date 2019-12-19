@@ -3,13 +3,13 @@ import { useState } from "react";
 
 /* Import Components Bootstrap */
 import { Button } from "react-bootstrap";
-import { Table } from "./table";
+import { Table } from "./TableGnomes";
 /* Icons */
 import { FaRegWindowRestore } from "react-icons/fa";
 
 /* Styles */
 import styled from "styled-components";
-import "./gnomes.scss";
+import "./Gnomes.scss";
 
 const Styles = styled.div`
   padding: 1rem;

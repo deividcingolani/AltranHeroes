@@ -3,8 +3,8 @@ import useForm from "react-hook-form";
 import Select from "react-select";
 import { Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
-import "./gnomeFilter.scss";
-import "./buttonFilter.scss";
+import "./GnomeFilter.scss";
+import "./ButtonFilter.scss";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../../store/actions/index";
 

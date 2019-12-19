@@ -20,7 +20,7 @@ import {
 import { FaFilter } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-import classes from "./gnomeFilter/toggleFilter.module.css";
+import classes from "./GnomeFilter/ToggleFilter.module.css";
 
 export function Table({ columns, data, setData }) {
   const {
