@@ -102,8 +102,6 @@ Decision core
 
     For table, I use component React-Table because with this I can use pagination and ordering more easy and quicly, but filters are building outside of table because when if I try put the filters inside of my table there are showing in relation with header and is not clean for a quicly lecture.
 
-    I add a functionality where a user can use a filters and page with query-string as https://altran.herokuapp.com/?gender=male -When change the page update the url because the heroe can share this url with other heroe.
-
 Requirements
 
     Node Version v12.13.1

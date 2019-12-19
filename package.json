@@ -24,7 +24,6 @@
     "match-sorter": "^4.0.2",
     "namor": "^2.0.2",
     "node-sass": "^4.13.0",
-    "query-string": "^6.9.0",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
@@ -40,16 +39,14 @@
     "react-table": "^7.0.0-rc.9",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "regenerator-runtime": "^0.13.3",
     "sinon": "^7.5.0",
     "styled-components": "^4.4.1",
-    "url-parse": "^1.4.7",
     "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(babel-jest)/)'",
+    "test": "react-scripts test ",
     "test:watch": "jest --watch",
     "eject": "react-scripts eject"
   },
@@ -69,13 +66,12 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
     "jest": "^24.9.0"
   },
   "jest": {
     "transformIgnorePatterns": [
-      "/node_modules/(?!(react-native|redux-persist|react-navigation.*?\\.js$))"
+      "/node_modules/(?!(react-native|redux-persist|react-navigation.*?\\.js$))",
+      "node_modules/(?!(babel-jest)/)"
     ]
   },
   "transform": {
