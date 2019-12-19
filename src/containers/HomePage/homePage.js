@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 
 import Modal from "react-bootstrap/Modal";
 import { Gnomes, Gnome } from "../../components/index";
-import * as actions from "../../store/actions/index";
 
 import "./homePage.scss";
 
 export function HomePage() {
   const [openModalGnome, setOpenModalGnome] = useState(false);
+  const [gnomeSelected, setGnomeSelected] = useState({});
 
-  const dispatch = useDispatch();
 
   const openModal = row => {
-    dispatch(actions.setGnomeSelected(row.original));
+    setGnomeSelected(row.original);
     setOpenModalGnome(true);
   };
   const closeModal = () => {
@@ -32,7 +30,7 @@ export function HomePage() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Gnome onCloseModal={closeModal} />
+          <Gnome onCloseModal={closeModal} gnomeSelected={gnomeSelected}/>
         </Modal.Body>
       </Modal>
 

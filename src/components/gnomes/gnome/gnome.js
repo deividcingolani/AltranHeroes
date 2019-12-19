@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import "./gnome.scss";
 import { FiHelpCircle } from "react-icons/fi";
-import { useSelector, useDispatch } from "react-redux";
-import * as actions from "../../../store/actions/index";
+import { useSelector } from "react-redux";
 
-export function Gnome({ onCloseModal }) {
-  const data = useSelector(state => state.gnomes.gnomeSelected);
+export function Gnome({ onCloseModal, gnomeSelected }) {
+  const [data, setData] = useState(gnomeSelected);
+
   const gnomes = useSelector(state => state.gnomes.gnomes);
-  const dispatch = useDispatch();
 
   const onClickFriends = e => {
     const gnomeFriend = gnomes.filter(
       gnome => gnome.name === e.target.value
     )[0];
-    dispatch(actions.setGnomeSelected(gnomeFriend));
+    setData(gnomeFriend);
   };
   return (
     <div className="form gnomeDetail row" readOnly>

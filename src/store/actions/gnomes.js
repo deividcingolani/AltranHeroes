@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import axios from "../../axios/axios-gnomes";
+import axios from "../../api/gnomes";
 
 export const setGnomes = gnomes => {
   return {
@@ -19,14 +19,6 @@ export const setInitialized = initialized => {
   return {
     type: actionTypes.SET_INITIALIZED,
     initialized: initialized
-  };
-};
-
-export const setGnomeSelected = gnome => {
-  console.log("setGnomesSelected actions");
-  return {
-    type: actionTypes.SET_GNOME_SELECTED,
-    gnomeSelected: gnome
   };
 };
 
