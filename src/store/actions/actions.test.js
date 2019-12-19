@@ -1,4 +1,4 @@
-import * as actions from './actionCreator'
+/* import * as actions from './actionCreator'
 import * as types from './actionsTypes'
 
 describe('actions', () => {
@@ -14,4 +14,4 @@ describe('actions', () => {
         }
         expect(actions.setGnomes(gnome)).toEqual(expectedAction)
     })
-})
+}) */

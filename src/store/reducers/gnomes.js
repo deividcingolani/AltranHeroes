@@ -19,12 +19,6 @@ const setGnomes = (state, action) => {
   });
 };
 
-const setGnomesFilter = (state, action) => {
-  return updateObject(state, {
-    gnomesFilter: action.gnomesFilter
-  });
-};
-
 const fetchGnomesFailed = (state, action) => {
   return updateObject(state, { error: true });
 };
@@ -35,12 +29,8 @@ const reducer = (state = initialState, action) => {
       return setGnomes(state, action);
     case actionTypes.FETCH_GNOMES_FAILED:
       return fetchGnomesFailed(state, action);
-
     case actionTypes.SET_INITIALIZED:
       return setInitialized(state, action);
-    case actionTypes.SET_GNOMES_FILTER:
-      return setGnomesFilter(state, action);
-
     default:
       return state;
   }

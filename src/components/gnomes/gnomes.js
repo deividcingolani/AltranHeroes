@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { GnomeFilter } from "../index";
 import { useState } from "react";
 import useQueryString from "../../vendor/useQueryString";
@@ -73,7 +72,7 @@ const Styles = styled.div`
   }
 `;
 
-function Table({ columns, data, params }) {
+function Table({ columns, data, params, setData }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -167,6 +166,7 @@ function Table({ columns, data, params }) {
           showFormFilter={showFormFilter}
           onClick={onClickFilter}
           gotoPage={gotoPage}
+          setData={setData}
         />
       </div>
       {/* Render Table of Gnomes */}
@@ -343,11 +343,10 @@ export function Gnomes(params) {
     ],
     [params]
   );
-  const gnomes = useSelector(state => state.gnomes.gnomesFilter);
-
+  const [data,setData]= useState([]);
   return (
     <Styles>
-      <Table columns={columns} data={gnomes} params={params} />
+      <Table columns={columns} data={data} params={params} setData={setData}/>
     </Styles>
   );
 }

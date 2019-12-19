@@ -8,13 +8,6 @@ export const setGnomes = gnomes => {
   };
 };
 
-export const setGnomesFilter = gnomesFilter => {
-  return {
-    type: actionTypes.SET_GNOMES_FILTER,
-    gnomesFilter: gnomesFilter
-  };
-};
-
 export const setInitialized = initialized => {
   return {
     type: actionTypes.SET_INITIALIZED,
@@ -46,7 +39,6 @@ export const initGnomes = () => {
         );
 
         dispatch(setGnomes(gnomesCustom));
-        dispatch(setGnomesFilter(gnomesCustom));
         dispatch(setInitialized(true));
       })
       .catch(error => {

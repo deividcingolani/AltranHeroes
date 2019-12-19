@@ -14,18 +14,21 @@ import classes from "./toggleFilter.module.css";
 export const GnomeFilter = params => {
   const { handleSubmit, register, setValue } = useForm();
   const initialized = useSelector(state => state.gnomes.initialized);
+  const gnomes = useSelector(state => state.gnomes.gnomes);
+  const dispatch = useDispatch();
 
   /* This is for call to get data when the app is not inialized */
   useEffect(() => {
     if (!initialized) {
-      dispatch(actions.initGnomes());
+      InitializacionGnomes()
+      params.setData(gnomes);
     }
   });
 
-  let gnomes = useSelector(state => state.gnomes.gnomes);
-
-  const dispatch = useDispatch();
-
+  const InitializacionGnomes=()=>{
+    dispatch(actions.initGnomes());
+    
+  }
   /* Cities */
   const optionsCities = [
     { value: "0", label: "All" },
@@ -84,36 +87,37 @@ export const GnomeFilter = params => {
   }
 
   const onSubmit = values => {
+    let gnomestoFilter = gnomes;
     if (values.city.value !== "0") {
-      gnomes = gnomes.filter(gnome => gnome.city === values.city.label);
+      gnomestoFilter = gnomestoFilter.filter(gnome => gnome.city === values.city.label);
     }
 
     /* Filter by name */
     if (values.name.trim() !== "") {
-      gnomes = gnomes.filter(gnome => gnome.name === values.name);
+      gnomestoFilter = gnomestoFilter.filter(gnome => gnome.name === values.name);
     }
 
     /* Filter by Gender */
     if (values.gender.value !== "0") {
-      gnomes = gnomes.filter(gnome => gnome.gender === values.gender.label);
+      gnomestoFilter = gnomestoFilter.filter(gnome => gnome.gender === values.gender.label);
     }
 
     /* Filter by  Age */
-    gnomes = gnomes.filter(gnome => gnome.age >= values.ageMin);
-    gnomes = gnomes.filter(gnome => gnome.age <= values.ageMax);
+    gnomestoFilter = gnomestoFilter.filter(gnome => gnome.age >= values.ageMin);
+    gnomestoFilter = gnomestoFilter.filter(gnome => gnome.age <= values.ageMax);
 
     /* Filter by  Weight */
-    gnomes = gnomes.filter(gnome => gnome.weight >= values.weightMin);
-    gnomes = gnomes.filter(gnome => gnome.weight <= values.weightMax);
+    gnomestoFilter = gnomestoFilter.filter(gnome => gnome.weight >= values.weightMin);
+    gnomestoFilter = gnomestoFilter.filter(gnome => gnome.weight <= values.weightMax);
 
     /* Filter by  Height */
     const min = parseInt(values.heightMin, 10);
     const max = parseInt(values.heightMax, 10);
 
-    gnomes = gnomes.filter(gnome => gnome.height >= min);
-    gnomes = gnomes.filter(gnome => gnome.height <= max);
+    gnomestoFilter = gnomestoFilter.filter(gnome => gnome.height >= min);
+    gnomestoFilter = gnomestoFilter.filter(gnome => gnome.height <= max);
 
-    dispatch(actions.setGnomesFilter(gnomes));
+    params.setData(gnomestoFilter);
   };
 
   /* Set default Value */
@@ -122,11 +126,6 @@ export const GnomeFilter = params => {
   let genderSelected;
   citySelected = optionsCities[0];
   genderSelected = optionsGender[0];
-
-  const onClickFriend = () => {
-    console.log("here");
-  };
-
   return (
     <div className={styleShowForm}>
       <form onSubmit={handleSubmit(onSubmit)} className="row formFilter ">
@@ -252,7 +251,6 @@ export const GnomeFilter = params => {
           <Button
             type="submit"
             className="col-sm-12 col-lg-8 submitButtonFilter btn-text"
-            onClick={onClickFriend}
           >
             Apply Filter
           </Button>
