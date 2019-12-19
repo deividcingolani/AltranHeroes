@@ -23,7 +23,7 @@ export const fetchGnomesFailed = () => {
 
 export const initGnomes = () => {
   return dispatch => {
-    axios
+    return axios
       .get("rrafols/mobile_test/master/data.json")
       .then(response => {
         const gnomes = response.data.Brastlewark;

@@ -3,7 +3,6 @@ import { updateObject } from "../../shared/utility";
 
 const initialState = {
   gnomes: [],
-  gnomesFilter: [],
   error: false,
   initialized: false
 };
