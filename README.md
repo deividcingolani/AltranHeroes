@@ -5,7 +5,8 @@ This is an application for a team who is playing a fantasy role-playing game and
 For solution this issue, this app give they all information about gnomes of the city.
 
 ## Versions
-- [1.0](http://altran.herokuapp.com/) This is the actual version on production.
+- [0.2] (19/12/2019) Beta -> (http://altran.herokuapp.com/) .
+- [0.1] (17/12/2019) Beta.
 
 
 ## LICENSE 
