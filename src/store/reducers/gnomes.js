@@ -18,7 +18,7 @@ const setGnomes = (state, action) => {
   });
 };
 
-const fetchGnomesFailed = (state) => {
+const fetchGnomesFailed = state => {
   return updateObject(state, { error: true });
 };
 

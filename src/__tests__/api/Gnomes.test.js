@@ -16,5 +16,6 @@ it("calls axios and returns gnomes", async () => {
   expect(gnomes).toEqual([{ name: "Gnome" }, { name: "Gnome 2" }]);
   expect(mockAxios.get).toHaveBeenCalledTimes(1);
   expect(mockAxios.get).toHaveBeenCalledWith(
-    "https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json")
+    "https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json"
+  );
 });

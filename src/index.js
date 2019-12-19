@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 
 import gnomesReducer from "./store/reducers/gnomes";
-import { Provider } from "react-redux";
+import { Provider } from "./components/Gnomes/GnomeFilter/Gnome/node_modules/react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 

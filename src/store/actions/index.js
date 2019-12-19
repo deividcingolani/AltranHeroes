@@ -1,5 +1,1 @@
-export {
-  setGnomes,
-  setInitialized,
-  initGnomes
-} from "./gnomes";
+export { setGnomes, setInitialized, initGnomes } from "./gnomes";
