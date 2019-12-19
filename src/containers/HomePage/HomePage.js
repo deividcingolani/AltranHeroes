@@ -8,10 +8,10 @@ export function HomePage() {
 
   const openModal = row => {
     setGnomeSelected(row.original);
-    setOpenModalGnome(true);
+    toggleModal();
   };
-  const closeModal = () => {
-    setOpenModalGnome(false);
+  const toggleModal = () => {
+    setOpenModalGnome(!openModalGnome);
   };
 
   return (
@@ -19,7 +19,7 @@ export function HomePage() {
       {/* MODAL  */}
       <GnomeModal
         openModalGnome={openModalGnome}
-        closeModal={closeModal}
+        closeModal={toggleModal}
         gnomeSelected={gnomeSelected}
         className="gnomeModal"
       />
