@@ -179,6 +179,8 @@ export const GnomeFilter = params => {
                 type="number"
                 ref={register}
                 defaultValue={minAge}
+                min={minAge}
+                max={maxAge}
               />
               To
               <input
@@ -187,6 +189,8 @@ export const GnomeFilter = params => {
                 type="number"
                 ref={register}
                 defaultValue={maxAge}
+                min={minAge}
+                max={maxAge}
               />
             </div>
           </div>
@@ -203,6 +207,8 @@ export const GnomeFilter = params => {
                 type="number"
                 ref={register}
                 defaultValue={minWeight}
+                min={minWeight}
+                max={maxWeight}
               />
               To
               <input
@@ -211,6 +217,8 @@ export const GnomeFilter = params => {
                 type="number"
                 ref={register}
                 defaultValue={maxWeight}
+                min={minWeight}
+                max={maxWeight}
               />
             </div>
           </div>
@@ -227,6 +235,8 @@ export const GnomeFilter = params => {
                 type="number"
                 ref={register}
                 defaultValue={minHeight}
+                min={minHeight}
+                max={maxHeight}
               />
               To
               <input

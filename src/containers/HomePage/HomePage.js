@@ -21,10 +21,11 @@ export function HomePage() {
         openModalGnome={openModalGnome}
         closeModal={closeModal}
         gnomeSelected={gnomeSelected}
+        className="gnomeModal"
       />
 
       {/* List of Gnomes */}
-      <Gnomes onClick={openModal} />
+      <Gnomes className="gnomes" onClick={openModal} />
     </div>
   );
 }

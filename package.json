@@ -4,13 +4,13 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.7.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
     "@material-ui/core": "^4.7.2",
     "@material-ui/icons": "^4.5.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.0",
     "babel-jest": "^24.9.0",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.4.1",
     "cross-fetch": "^3.0.4",
@@ -20,6 +20,7 @@
     "fetch-mock": "^8.2.0-beta.2",
     "formik": "^2.0.7",
     "framer-motion": "^1.7.0",
+    "jest-cli": "^24.9.0",
     "match-sorter": "^4.0.2",
     "namor": "^2.0.2",
     "node-sass": "^4.13.0",
@@ -48,7 +49,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(babel-jest)/)'",
     "test:watch": "jest --watch",
     "eject": "react-scripts eject"
   },
@@ -68,11 +69,24 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@types/jest": "^24.0.24",
     "axios-mock-adapter": "^1.17.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "enzyme-to-json": "^3.4.3",
     "jest": "^24.9.0",
     "react-test-renderer": "^16.12.0",
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.3"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(react-native|redux-persist|react-navigation.*?\\.js$))"
+    ]
+  },
+  "transform": {
+    "\\.js$": "<rootDir>/node_modules/babel-jest"
   }
 }

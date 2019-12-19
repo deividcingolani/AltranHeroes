@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   gnomes: gnomesReducer
 });
 
-const store = createStore(
+export const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
