@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import axios from "../../api/gnomes";
+import setGnomesApi from "../../api/Gnomes";
 
 export const setGnomes = gnomes => {
   return {
@@ -23,10 +23,8 @@ export const fetchGnomesFailed = () => {
 
 export const initGnomes = () => {
   return dispatch => {
-    return axios
-      .get("rrafols/mobile_test/master/data.json")
-      .then(response => {
-        const gnomes = response.data.Brastlewark;
+    return setGnomesApi()
+      .then(gnomes => {
         const gnomesCustom = gnomes.map(
           (g, i) =>
             (g = {
@@ -41,7 +39,7 @@ export const initGnomes = () => {
         dispatch(setGnomes(gnomesCustom));
         dispatch(setInitialized(true));
       })
-      .catch(error => {
+      .catch(() => {
         dispatch(fetchGnomesFailed());
       });
   };

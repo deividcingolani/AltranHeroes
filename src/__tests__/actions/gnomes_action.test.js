@@ -2,18 +2,16 @@ import * as actions from "../../store/actions/index";
 import * as types from "../../store/actions/actionTypes";
 
 describe("actions", () => {
- 
-    it("should set initialized  in true ", () => {
-      const initialized = true
-        const expectedAction = {
-            type: types.SET_INITIALIZED,
-            initialized
+  it("should set initialized  in true ", () => {
+    const initialized = true;
+    const expectedAction = {
+      type: types.SET_INITIALIZED,
+      initialized
+    };
+    expect(actions.setInitialized(true)).toEqual(expectedAction);
+  });
 
-          };
-        expect(actions.setInitialized(true)).toEqual(expectedAction);
-    });
- 
-    it("should create an action to set gnomes", () => {
+  it("should create an action to set gnomes", () => {
     const gnomes = [
       {
         id: 0,
