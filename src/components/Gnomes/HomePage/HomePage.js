@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Gnomes, GnomeModal } from "../../components/index";
+import { Gnomes, GnomeModal } from "../../index";
 import "./HomePage.scss";
 
 export function HomePage() {

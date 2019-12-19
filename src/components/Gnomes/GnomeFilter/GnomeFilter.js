@@ -131,7 +131,7 @@ export const GnomeFilter = params => {
           <div className="form-group col-md-4">
             <label htmlFor="name">City</label>
             <RHFInput
-              as={<Select options={optionsCities} />}
+              as={<Select name="city" options={optionsCities} />}
               rules={{ required: true }}
               name="city"
               register={register}
