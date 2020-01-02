@@ -39,9 +39,13 @@ Requirements
 Install
 
 $ git clone https://github.com/deividcingolani/AltranHeroes.git
+
 $ cd AltranHeroes
+
 $ npm install
+
 $ npm start
+
 
 Simple build for production
 $ npm run build
